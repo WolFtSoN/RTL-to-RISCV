@@ -3,7 +3,7 @@
 ### Notes:
 
 To run testbenches:  
-    Using ModelSim: Run in terminal from rtl2job `./run ./<folder containing the design.sv and tb_design.sv>` 
+    Using ModelSim: Run in terminal from main directory (RTL100Challenge) `./run ./<folder containing the design.sv and tb_design.sv>` 
 
 <!--
 - To preview: Ctrl+Shift+V
