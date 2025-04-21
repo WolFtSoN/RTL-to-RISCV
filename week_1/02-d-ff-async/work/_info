@@ -1,0 +1,56 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/RTL100Challange/week_1/d-ff-async
+vd_ff_async
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1745258185
+!i10b 1
+!s100 O>F?`U3WQdf>3`Eb?7EUj3
+I;KW;b]n^cC20Y[Li37dEk0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 d_ff_async_sv_unit
+S1
+R0
+w1745257632
+8d_ff_async.sv
+Fd_ff_async.sv
+L0 1
+Z4 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z5 !s108 1745258185.000000
+Z6 !s107 tb_d_ff_async.sv|d_ff_async.sv|
+Z7 !s90 d_ff_async.sv|tb_d_ff_async.sv|
+!i113 1
+Z8 tCvgOpt 0
+vtb_d_ff_async
+R1
+R2
+!i10b 1
+!s100 GU8HVRaa]SeC8oeX1_ean0
+I:UN?U6=Y=D[Z6eEUO1VGS2
+R3
+!s105 tb_d_ff_async_sv_unit
+S1
+R0
+w1745258183
+8tb_d_ff_async.sv
+Ftb_d_ff_async.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+R8

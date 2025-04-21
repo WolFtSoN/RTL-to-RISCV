@@ -1,0 +1,17 @@
+# do sim.do
+# vsim -c work.tb_d_ff_async 
+# Start time: 20:56:25 on Apr 21,2025
+# Loading sv_std.std
+# Loading work.tb_d_ff_async
+# Loading work.d_ff_async
+# ----------------------------------------------
+# Time | rst	| d | q
+#   15 | 0	| 1 | 0
+#   25 | 0	| 0 | 1
+#   35 | 1	| 0 | 0
+#   55 | 0	| 1 | 0
+# ----------------------------------------------
+# ** Note: $finish    : tb_d_ff_async.sv(40)
+#    Time: 75 ps  Iteration: 0  Instance: /tb_d_ff_async
+# End time: 20:56:25 on Apr 21,2025, Elapsed time: 0:00:00
+# Errors: 0, Warnings: 0
