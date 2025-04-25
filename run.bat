@@ -88,7 +88,12 @@ set "do_file=sim.do"
 :: Run simulation
 :: -----------------------------
 echo Running simulation...
-vsim -c -do %do_file%
+if "%wave_option%"=="-wave" (
+    vsim -do %do_file%
+) else (
+    vsim -c -do %do_file%
+)
+
 
 popd
 endlocal
