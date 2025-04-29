@@ -1,0 +1,26 @@
+# do sim.do
+# vsim -c work.tb_mem_interface 
+# Start time: 12:15:10 on Apr 27,2025
+# Loading sv_std.std
+# Loading work.tb_mem_interface
+# Loading work.mem_interface
+# ---------------------------------------------
+#  T =  5 | req_valid = 0 | req_write = 0 | req_addr =  0 | req_wdata =   0 | req_ready = 1 | resp_valid = 0 | resp_wdata =   0
+#  T = 15 | req_valid = 0 | req_write = 0 | req_addr =  0 | req_wdata =   0 | req_ready = 1 | resp_valid = 0 | resp_wdata =   0
+#  T = 25 | req_valid = 1 | req_write = 1 | req_addr =  0 | req_wdata =  10 | req_ready = 1 | resp_valid = 0 | resp_wdata =   0
+#  T = 35 | req_valid = 1 | req_write = 1 | req_addr =  1 | req_wdata =  20 | req_ready = 1 | resp_valid = 0 | resp_wdata =   0
+#  T = 45 | req_valid = 1 | req_write = 1 | req_addr =  2 | req_wdata =  30 | req_ready = 1 | resp_valid = 0 | resp_wdata =   0
+#  T = 55 | req_valid = 0 | req_write = 1 | req_addr =  2 | req_wdata =   0 | req_ready = 1 | resp_valid = 0 | resp_wdata =   0
+#  T = 65 | req_valid = 1 | req_write = 0 | req_addr =  0 | req_wdata =   0 | req_ready = 1 | resp_valid = 0 | resp_wdata =   0
+#  T = 75 | req_valid = 1 | req_write = 0 | req_addr =  1 | req_wdata =   0 | req_ready = 1 | resp_valid = 1 | resp_wdata =  10
+#  T = 85 | req_valid = 1 | req_write = 0 | req_addr =  2 | req_wdata =   0 | req_ready = 1 | resp_valid = 1 | resp_wdata =  20
+#  T = 95 | req_valid = 0 | req_write = 0 | req_addr =  2 | req_wdata =   0 | req_ready = 1 | resp_valid = 1 | resp_wdata =  30
+#  T = 105 | req_valid = 0 | req_write = 0 | req_addr =  2 | req_wdata =   0 | req_ready = 1 | resp_valid = 0 | resp_wdata =  30
+#  T = 115 | req_valid = 0 | req_write = 0 | req_addr =  2 | req_wdata =   0 | req_ready = 1 | resp_valid = 0 | resp_wdata =  30
+#  T = 125 | req_valid = 0 | req_write = 0 | req_addr =  2 | req_wdata =   0 | req_ready = 1 | resp_valid = 0 | resp_wdata =  30
+#  T = 135 | req_valid = 0 | req_write = 0 | req_addr =  2 | req_wdata =   0 | req_ready = 1 | resp_valid = 0 | resp_wdata =  30
+# ---------------------------------------------
+# ** Note: $finish    : tb_mem_interface.sv(60)
+#    Time: 135 ps  Iteration: 1  Instance: /tb_mem_interface
+# End time: 12:15:11 on Apr 27,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0

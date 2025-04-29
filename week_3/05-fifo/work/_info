@@ -1,0 +1,56 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/RTL100Challange/week_3/05-fifo
+vfifo
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1745916313
+!i10b 1
+!s100 cH0R6Xjz2bPg?nQWm0`DW0
+IoMgQGBXgc5jE^A][_1Znm0
+Z3 VDg1SIo80bB@j0V0VzS_@n1
+!s105 fifo_sv_unit
+S1
+R0
+w1745916035
+8fifo.sv
+Ffifo.sv
+L0 11
+Z4 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z5 !s108 1745916313.000000
+Z6 !s107 tb_fifo.sv|fifo.sv|
+Z7 !s90 fifo.sv|tb_fifo.sv|
+!i113 1
+Z8 tCvgOpt 0
+vtb_fifo
+R1
+R2
+!i10b 1
+!s100 172g_2z9Y3Df]>;E1RZG?1
+Ii5[@Aj1PDC@4KS4?M>oiW0
+R3
+!s105 tb_fifo_sv_unit
+S1
+R0
+w1745916305
+8tb_fifo.sv
+Ftb_fifo.sv
+L0 1
+R4
+r1
+!s85 0
+31
+R5
+R6
+R7
+!i113 1
+R8

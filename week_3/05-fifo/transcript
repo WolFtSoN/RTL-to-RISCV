@@ -1,0 +1,50 @@
+# do sim.do
+# vsim -c work.tb_fifo 
+# Start time: 11:45:13 on Apr 29,2025
+# Loading sv_std.std
+# Loading work.tb_fifo
+# Loading work.fifo
+# ---------------------------------------------
+# T =   5 | wr_en = 0 | rd_en = 0 | din = 0 | counter = 0 | dout = x | full = 0 | empty = 1
+# T =  15 | wr_en = 1 | rd_en = 0 | din = 1 | counter = 0 | dout = x | full = 0 | empty = 1
+# T =  25 | wr_en = 1 | rd_en = 0 | din = 2 | counter = 1 | dout = x | full = 0 | empty = 0
+# T =  35 | wr_en = 1 | rd_en = 0 | din = 3 | counter = 2 | dout = x | full = 0 | empty = 0
+# T =  45 | wr_en = 1 | rd_en = 0 | din = 4 | counter = 3 | dout = x | full = 0 | empty = 0
+# T =  55 | wr_en = 1 | rd_en = 0 | din = 5 | counter = 4 | dout = x | full = 0 | empty = 0
+# T =  65 | wr_en = 1 | rd_en = 0 | din = 6 | counter = 5 | dout = x | full = 0 | empty = 0
+# T =  75 | wr_en = 1 | rd_en = 0 | din = 7 | counter = 6 | dout = x | full = 0 | empty = 0
+# T =  85 | wr_en = 1 | rd_en = 0 | din = 8 | counter = 7 | dout = x | full = 0 | empty = 0
+# T =  95 | wr_en = 1 | rd_en = 0 | din = 9 | counter = 8 | dout = x | full = 0 | empty = 0
+# T = 105 | wr_en = 1 | rd_en = 0 | din = 10 | counter = 9 | dout = x | full = 0 | empty = 0
+# T = 115 | wr_en = 1 | rd_en = 0 | din = 11 | counter = 10 | dout = x | full = 0 | empty = 0
+# T = 125 | wr_en = 1 | rd_en = 0 | din = 12 | counter = 11 | dout = x | full = 0 | empty = 0
+# T = 135 | wr_en = 1 | rd_en = 0 | din = 13 | counter = 12 | dout = x | full = 0 | empty = 0
+# T = 145 | wr_en = 1 | rd_en = 0 | din = 14 | counter = 13 | dout = x | full = 0 | empty = 0
+# T = 155 | wr_en = 1 | rd_en = 0 | din = 15 | counter = 14 | dout = x | full = 0 | empty = 0
+# T = 165 | wr_en = 1 | rd_en = 0 | din = 16 | counter = 15 | dout = x | full = 0 | empty = 0
+# T = 175 | wr_en = 0 | rd_en = 0 | din = 0 | counter = 16 | dout = x | full = 1 | empty = 0
+# T = 185 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 16 | dout = x | full = 1 | empty = 0
+# T = 195 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 15 | dout = 1 | full = 0 | empty = 0
+# T = 205 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 14 | dout = 2 | full = 0 | empty = 0
+# T = 215 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 13 | dout = 3 | full = 0 | empty = 0
+# T = 225 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 12 | dout = 4 | full = 0 | empty = 0
+# T = 235 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 11 | dout = 5 | full = 0 | empty = 0
+# T = 245 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 10 | dout = 6 | full = 0 | empty = 0
+# T = 255 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 9 | dout = 7 | full = 0 | empty = 0
+# T = 265 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 8 | dout = 8 | full = 0 | empty = 0
+# T = 275 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 7 | dout = 9 | full = 0 | empty = 0
+# T = 285 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 6 | dout = 10 | full = 0 | empty = 0
+# T = 295 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 5 | dout = 11 | full = 0 | empty = 0
+# T = 305 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 4 | dout = 12 | full = 0 | empty = 0
+# T = 315 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 3 | dout = 13 | full = 0 | empty = 0
+# T = 325 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 2 | dout = 14 | full = 0 | empty = 0
+# T = 335 | wr_en = 0 | rd_en = 1 | din = 0 | counter = 1 | dout = 15 | full = 0 | empty = 0
+# T = 345 | wr_en = 0 | rd_en = 0 | din = 0 | counter = 0 | dout = 16 | full = 0 | empty = 1
+# T = 355 | wr_en = 1 | rd_en = 0 | din = 5 | counter = 0 | dout = 16 | full = 0 | empty = 1
+# T = 365 | wr_en = 1 | rd_en = 1 | din = 10 | counter = 1 | dout = 16 | full = 0 | empty = 0
+# T = 375 | wr_en = 0 | rd_en = 0 | din = 10 | counter = 1 | dout = 5 | full = 0 | empty = 0
+# ---------------------------------------------
+# ** Note: $finish    : tb_fifo.sv(53)
+#    Time: 375 ps  Iteration: 1  Instance: /tb_fifo
+# End time: 11:45:14 on Apr 29,2025, Elapsed time: 0:00:01
+# Errors: 0, Warnings: 0
