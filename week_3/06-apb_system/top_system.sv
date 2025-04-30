@@ -1,3 +1,0 @@
-/*
-Connects everything together
-*/

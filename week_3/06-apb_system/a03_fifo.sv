@@ -8,7 +8,7 @@ Store structure: {rw_bit, addr, data}
 Outputs to APB Master
 */
 
-import defines_pkg::*;
+import a01_defines_pkg::*;
 
 module fifo (
     input logic                     clk,
@@ -61,5 +61,12 @@ end
 // Output full & empty
 assign full = (counter == FIFO_DEPTH);
 assign empty = (counter == 0);
+
+// always_ff @(posedge clk) begin
+//     if (wr_en && !full)
+//         $display("DEBUG FIFO: WR ptr=%0d data=%0d", wr_ptr, din[31:0]);
+//     if (rd_en && !empty)
+//         $display("DEBUG FIFO: RD ptr=%0d data=%0d", rd_ptr, fifo[rd_ptr][31:0]);
+// end
     
 endmodule

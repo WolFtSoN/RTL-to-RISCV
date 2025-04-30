@@ -6,7 +6,7 @@ Outputs : Selected command (write first if both active)
 Generates FIFO input: {type, addr, data}
 */
 
-import defines_pkg::*;
+import a01_defines_pkg::*;
 
 module arbiter (
     input logic                 clk,
@@ -18,7 +18,7 @@ module arbiter (
     input logic [ADDR_W-1:0]    rd_addr_i,
 
     output logic                fifo_wr_en_o,   // Enable write into FIFO
-    output logic [65:0]         fifo_data_o     // {1'brw, 32-bit addr, 32-bit data}  // 1'brw = read/write 
+    output logic [64:0]         fifo_data_o     // {1'brw, 32-bit addr, 32-bit data}  // 1'brw = read/write 
 );
     
 // TODO:
@@ -37,11 +37,18 @@ always_ff @(posedge clk or posedge rst) begin
             fifo_data_o     <= {1'b1,wr_addr_i,wr_data_i}; 
         end else if (rd_req_i) begin
             fifo_wr_en_o    <= 1;
-            fifo_data_o     <= {1'b0,rd_addr_i,'x};
+            fifo_data_o     <= {1'b0,rd_addr_i,{ADDR_W{1'b0}}};
         end else begin
             fifo_wr_en_o    <= 0;
             fifo_data_o     <= '0;
         end
     end
 end
+
+// always_ff @(posedge clk) begin
+//     if (wr_req_i)
+//         $display("DEBUG ARBITER: wr_req_i = %0d | fifo_wr_en_o = %0b | wr/rd = %0b | addr = %0d | data = %0d", wr_req_i,fifo_wr_en_o, fifo_data_o[64], fifo_data_o[63:32], fifo_data_o[31:0]);
+//     if (rd_req_i)
+//         $display("DEBUG ARBITER: rd_addr_i = %0d | fifo_wr_en_o = %0b | wr/rd = %0b | addr = %0d | data = %0d", rd_addr_i,fifo_wr_en_o, fifo_data_o[64], fifo_data_o[63:32], fifo_data_o[31:0]);
+// end
 endmodule

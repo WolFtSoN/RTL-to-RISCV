@@ -1,6 +1,19 @@
 @echo off
 setlocal enabledelayedexpansion
 
+:: Remove 'work' folder if it exists
+if exist "work" (
+    rmdir /s /q "work"
+)
+
+:: Confirm deletion
+if not exist "work" (
+    echo 'work' folder successfully deleted.
+) else (
+    echo Failed to delete 'work' folder.
+    exit /b 1
+)
+
 set "target_folder="
 set "wave_option="
 
