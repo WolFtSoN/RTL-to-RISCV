@@ -1,0 +1,525 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+Z0 dD:/RTL100Challange/risc-v
+Xall_pkgs
+Z1 DXx6 sv_std 3 std 0 22 AD7iAPLo6nTIKk<N0eo=D3
+Z2 !s110 1746353589
+!i10b 1
+!s100 >_z^nT:dV8Ol5TdbzlREF1
+I[IG9OoXz3<dgmo=fMN7c?3
+V[IG9OoXz3<dgmo=fMN7c?3
+S1
+R0
+w1746272404
+8D:\RTL100Challange\risc-v\all_pkgs.sv
+FD:\RTL100Challange\risc-v\all_pkgs.sv
+L0 1
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1746353589.000000
+Z5 !s107 D:\RTL100Challange\risc-v\06-control_unit\control_unit.sv|D:\RTL100Challange\risc-v\05-writeback\writeback_mux.sv|D:\RTL100Challange\risc-v\04-memory\data_mem.sv|D:\RTL100Challange\risc-v\03-execute\alu_ctrl.sv|D:\RTL100Challange\risc-v\03-execute\alu.sv|D:\RTL100Challange\risc-v\02-decode\regfile.sv|D:\RTL100Challange\risc-v\02-decode\decoder.sv|D:\RTL100Challange\risc-v\01-fetch\pc_register.sv|D:\RTL100Challange\risc-v\01-fetch\instr_mem.sv|D:\RTL100Challange\risc-v\tb_cpu.sv|D:\RTL100Challange\risc-v\cpu_single_cycle.sv|D:\RTL100Challange\risc-v\all_pkgs.sv|
+Z6 !s90 D:\RTL100Challange\risc-v\all_pkgs.sv|D:\RTL100Challange\risc-v\cpu_single_cycle.sv|D:\RTL100Challange\risc-v\tb_cpu.sv|D:\RTL100Challange\risc-v\01-fetch\instr_mem.sv|D:\RTL100Challange\risc-v\01-fetch\pc_register.sv|D:\RTL100Challange\risc-v\02-decode\decoder.sv|D:\RTL100Challange\risc-v\02-decode\regfile.sv|D:\RTL100Challange\risc-v\03-execute\alu.sv|D:\RTL100Challange\risc-v\03-execute\alu_ctrl.sv|D:\RTL100Challange\risc-v\04-memory\data_mem.sv|D:\RTL100Challange\risc-v\05-writeback\writeback_mux.sv|D:\RTL100Challange\risc-v\06-control_unit\control_unit.sv|
+!i113 1
+Z7 tCvgOpt 0
+valu
+R1
+Z8 DXx4 work 8 all_pkgs 0 22 [IG9OoXz3<dgmo=fMN7c?3
+DXx4 work 11 alu_sv_unit 0 22 jY8lkln9GMJ:ZcBR^[n>G1
+Z9 VDg1SIo80bB@j0V0VzS_@n1
+r1
+!s85 0
+31
+!i10b 1
+!s100 JKZPhVK8eQWf@<X=QS9nA3
+I4iBf^7aE6?M04<2lnVdeV1
+!s105 alu_sv_unit
+S1
+R0
+Z10 w1746272729
+Z11 8D:\RTL100Challange\risc-v\03-execute\alu.sv
+Z12 FD:\RTL100Challange\risc-v\03-execute\alu.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 1
+R7
+valu_ctrl
+R1
+R8
+DXx4 work 16 alu_ctrl_sv_unit 0 22 [lR4MF8_jFJA2i8QL0oPk3
+R9
+r1
+!s85 0
+31
+!i10b 1
+!s100 OLOA``^0n<CR_;gS<ImJZ1
+I59gGB4UYz7@O=Wadk@CZ[0
+!s105 alu_ctrl_sv_unit
+S1
+R0
+Z13 w1746350931
+Z14 8D:\RTL100Challange\risc-v\03-execute\alu_ctrl.sv
+Z15 FD:\RTL100Challange\risc-v\03-execute\alu_ctrl.sv
+L0 9
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xalu_ctrl_sv_unit
+R1
+R8
+V[lR4MF8_jFJA2i8QL0oPk3
+r1
+!s85 0
+31
+!i10b 1
+!s100 Tfk7^zi;6bP1i;oG[b@4I0
+I[lR4MF8_jFJA2i8QL0oPk3
+!i103 1
+S1
+R0
+R13
+R14
+R15
+L0 7
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xalu_sv_unit
+R1
+R8
+VjY8lkln9GMJ:ZcBR^[n>G1
+r1
+!s85 0
+31
+!i10b 1
+!s100 T[_zRG:>[kG:J;7_U@MAZ1
+IjY8lkln9GMJ:ZcBR^[n>G1
+!i103 1
+S1
+R0
+R10
+R11
+R12
+L0 6
+R3
+R4
+R5
+R6
+!i113 1
+R7
+vcontrol_unit
+R1
+R8
+DXx4 work 20 control_unit_sv_unit 0 22 S^VZ0mhz4Kd080;zc18`k1
+R9
+r1
+!s85 0
+31
+!i10b 1
+!s100 zT5iz?mgUfJ@lc6fzlGWB3
+I=niK^e1mEM]S0;MGz9b`Q3
+!s105 control_unit_sv_unit
+S1
+R0
+Z16 w1746349830
+Z17 8D:\RTL100Challange\risc-v\06-control_unit\control_unit.sv
+Z18 FD:\RTL100Challange\risc-v\06-control_unit\control_unit.sv
+L0 16
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xcontrol_unit_sv_unit
+R1
+R8
+VS^VZ0mhz4Kd080;zc18`k1
+r1
+!s85 0
+31
+!i10b 1
+!s100 h>Z`SZ^Nco_jcC8:beL4c1
+IS^VZ0mhz4Kd080;zc18`k1
+!i103 1
+S1
+R0
+R16
+R17
+R18
+L0 14
+R3
+R4
+R5
+R6
+!i113 1
+R7
+vcpu_single_cycle
+R1
+R8
+DXx4 work 24 cpu_single_cycle_sv_unit 0 22 e<[E=F[mE2Bl5PDcLgLRR3
+R9
+r1
+!s85 0
+31
+!i10b 1
+!s100 D:eXXQ]B[<J?iQ_Dh_LeL3
+I[a8G8LTnde5_@=4a7=CL;2
+!s105 cpu_single_cycle_sv_unit
+S1
+R0
+Z19 w1746353300
+Z20 8D:\RTL100Challange\risc-v\cpu_single_cycle.sv
+Z21 FD:\RTL100Challange\risc-v\cpu_single_cycle.sv
+L0 3
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xcpu_single_cycle_sv_unit
+R1
+R8
+Ve<[E=F[mE2Bl5PDcLgLRR3
+r1
+!s85 0
+31
+!i10b 1
+!s100 XZfIB[3;RfgD01d=WGo@Z0
+Ie<[E=F[mE2Bl5PDcLgLRR3
+!i103 1
+S1
+R0
+R19
+R20
+R21
+L0 1
+R3
+R4
+R5
+R6
+!i113 1
+R7
+vdata_mem
+R1
+R8
+DXx4 work 16 data_mem_sv_unit 0 22 _dQ5WDJPiOdiSfmj9:SY[0
+R9
+r1
+!s85 0
+31
+!i10b 1
+!s100 TfehhYzTFCzO34_mAadkg0
+I22nCkoH@;HFiMkY`d;0NU3
+!s105 data_mem_sv_unit
+S1
+R0
+Z22 w1746275659
+Z23 8D:\RTL100Challange\risc-v\04-memory\data_mem.sv
+Z24 FD:\RTL100Challange\risc-v\04-memory\data_mem.sv
+L0 9
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xdata_mem_sv_unit
+R1
+R8
+V_dQ5WDJPiOdiSfmj9:SY[0
+r1
+!s85 0
+31
+!i10b 1
+!s100 075O]i8UF>Bk9?I[_^UQD2
+I_dQ5WDJPiOdiSfmj9:SY[0
+!i103 1
+S1
+R0
+R22
+R23
+R24
+L0 7
+R3
+R4
+R5
+R6
+!i113 1
+R7
+vdecoder
+R1
+R8
+DXx4 work 15 decoder_sv_unit 0 22 Znd69=ERYonoJ=2Zi8l<Q2
+R9
+r1
+!s85 0
+31
+!i10b 1
+!s100 E^ORKQ2DG59LemAa7N>Wo1
+Ij`C=izmCS><Wn@KDhiHKU3
+!s105 decoder_sv_unit
+S1
+R0
+Z25 w1746274643
+Z26 8D:\RTL100Challange\risc-v\02-decode\decoder.sv
+Z27 FD:\RTL100Challange\risc-v\02-decode\decoder.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xdecoder_sv_unit
+R1
+R8
+VZnd69=ERYonoJ=2Zi8l<Q2
+r1
+!s85 0
+31
+!i10b 1
+!s100 1D<P;2fKCC=0SCAgJ:W=_1
+IZnd69=ERYonoJ=2Zi8l<Q2
+!i103 1
+S1
+R0
+R25
+R26
+R27
+L0 6
+R3
+R4
+R5
+R6
+!i113 1
+R7
+vinstr_mem
+R1
+R8
+DXx4 work 17 instr_mem_sv_unit 0 22 UZPLCoLJ3f@17N2GRXL>B1
+R9
+r1
+!s85 0
+31
+!i10b 1
+!s100 RRPR64ggBf@6aTMz;T1]^0
+Il9_CNQ343^Y7g1^4fVG^M3
+!s105 instr_mem_sv_unit
+S1
+R0
+Z28 w1746267853
+Z29 8D:\RTL100Challange\risc-v\01-fetch\instr_mem.sv
+Z30 FD:\RTL100Challange\risc-v\01-fetch\instr_mem.sv
+L0 10
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xinstr_mem_sv_unit
+R1
+R8
+VUZPLCoLJ3f@17N2GRXL>B1
+r1
+!s85 0
+31
+!i10b 1
+!s100 ?K1;nFC`K<KO0X[4Y`N=c1
+IUZPLCoLJ3f@17N2GRXL>B1
+!i103 1
+S1
+R0
+R28
+R29
+R30
+L0 8
+R3
+R4
+R5
+R6
+!i113 1
+R7
+vpc_register
+R1
+R8
+DXx4 work 19 pc_register_sv_unit 0 22 5aCh1gZQenoeOJHYe;NZQ1
+R9
+r1
+!s85 0
+31
+!i10b 1
+!s100 oI@N=>oTj[LYVlz3cS4RF0
+IKj;@b7d<Bh]lV?WGbdcnU1
+!s105 pc_register_sv_unit
+S1
+R0
+Z31 w1746267025
+Z32 8D:\RTL100Challange\risc-v\01-fetch\pc_register.sv
+Z33 FD:\RTL100Challange\risc-v\01-fetch\pc_register.sv
+L0 9
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xpc_register_sv_unit
+R1
+R8
+V5aCh1gZQenoeOJHYe;NZQ1
+r1
+!s85 0
+31
+!i10b 1
+!s100 1eG?WVXn:;<b?jV6:>GnL2
+I5aCh1gZQenoeOJHYe;NZQ1
+!i103 1
+S1
+R0
+R31
+R32
+R33
+L0 7
+R3
+R4
+R5
+R6
+!i113 1
+R7
+vregfile
+R1
+R8
+DXx4 work 15 regfile_sv_unit 0 22 FCM]ec3hRjHUU9>Dd7D>51
+R9
+r1
+!s85 0
+31
+!i10b 1
+!s100 mEYZci>AaXSI:Wn4<_Mn62
+IH;EAzcV;:0HG8RoIZnW[Q0
+!s105 regfile_sv_unit
+S1
+R0
+Z34 w1746353118
+Z35 8D:\RTL100Challange\risc-v\02-decode\regfile.sv
+Z36 FD:\RTL100Challange\risc-v\02-decode\regfile.sv
+L0 9
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xregfile_sv_unit
+R1
+R8
+VFCM]ec3hRjHUU9>Dd7D>51
+r1
+!s85 0
+31
+!i10b 1
+!s100 j2Hc@4ohJALNkHcYI5@0?3
+IFCM]ec3hRjHUU9>Dd7D>51
+!i103 1
+S1
+R0
+R34
+R35
+R36
+L0 7
+R3
+R4
+R5
+R6
+!i113 1
+R7
+vtb_cpu
+R1
+R2
+!i10b 1
+!s100 z53IZ0eO9_V9ElhA9A?2o0
+I[6<foKmonk87gA18fo2:V0
+R9
+!s105 tb_cpu_sv_unit
+S1
+R0
+w1746353589
+8D:\RTL100Challange\risc-v\tb_cpu.sv
+FD:\RTL100Challange\risc-v\tb_cpu.sv
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+R5
+R6
+!i113 1
+R7
+vwriteback_mux
+R1
+R8
+DXx4 work 21 writeback_mux_sv_unit 0 22 FX1a?zaGlBDA3VLj<YPJV1
+R9
+r1
+!s85 0
+31
+!i10b 1
+!s100 ^M^z4efE6anH;o6T[^IKJ0
+I1TK6IXC`eD[WGafRGI>V70
+!s105 writeback_mux_sv_unit
+S1
+R0
+Z37 w1746348736
+Z38 8D:\RTL100Challange\risc-v\05-writeback\writeback_mux.sv
+Z39 FD:\RTL100Challange\risc-v\05-writeback\writeback_mux.sv
+L0 8
+R3
+R4
+R5
+R6
+!i113 1
+R7
+Xwriteback_mux_sv_unit
+R1
+R8
+VFX1a?zaGlBDA3VLj<YPJV1
+r1
+!s85 0
+31
+!i10b 1
+!s100 k2oEIOFSlBZ?Z]Ch8Z_oW3
+IFX1a?zaGlBDA3VLj<YPJV1
+!i103 1
+S1
+R0
+R37
+R38
+R39
+L0 6
+R3
+R4
+R5
+R6
+!i113 1
+R7

@@ -51,11 +51,18 @@ if not exist work (
     vlib work
 )
 
+@REM :: -----------------------------
+@REM :: Compile all .sv files
+@REM :: -----------------------------
+@REM set "file_list="
+@REM for %%f in (*.sv) do (
+@REM     set "file_list=!file_list! %%f"
+@REM )
 :: -----------------------------
-:: Compile all .sv files
+:: Recursively compile all .sv files
 :: -----------------------------
 set "file_list="
-for %%f in (*.sv) do (
+for /R %%f in (*.sv) do (
     set "file_list=!file_list! %%f"
 )
 
