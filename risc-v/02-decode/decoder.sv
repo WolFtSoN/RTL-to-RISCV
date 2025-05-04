@@ -7,14 +7,17 @@ import all_pkgs::*;
 
 module decoder (
     input logic [WIDTH-1:0] instr,
-
+    // R-type
     output logic [6:0] opcode,
     output logic [4:0] rd,
     output logic [2:0] funct3,
     output logic [4:0] rs1,
     output logic [4:0] rs2,
     output logic [6:0] funct7,
-    output logic [11:0] imm_i  // I-type 
+    // I-type
+    output logic [11:0] imm_i,   
+    // S-type
+    output logic [11:0] imm_s
 );
 
 // TODO: Extract fields from instruction
@@ -30,5 +33,9 @@ assign funct7   = instr [31:25];
 
 // I-type - has the same opcode, rd, funct3, rs1 | doesn't have rs2 and funct7
 assign imm_i    = instr [31:20];
+
+// S-type
+assign imm_s    = {instr[31:25], instr[11:7]};
+
     
 endmodule

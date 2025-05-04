@@ -24,10 +24,6 @@ module control_unit (
 );
 
 // TODO: Implement control logic based on opcode
-// Initially support R-type (0110011) and I-type (0010011)
-localparam R_TYPE   = 7'b0110011;
-localparam I_TYPE   = 7'b0010011;
-
 always_comb begin 
     // Default values
     reg_wr_en   = 0;
@@ -38,12 +34,22 @@ always_comb begin
     case (opcode)
         R_TYPE : begin
             reg_wr_en   = 1;
-            alu_src     = 0;
+            alu_src     = 0;        
         end 
         I_TYPE: begin
+            reg_wr_en   = 1;    
+            alu_src     = 1;    
+        end 
+        I_LOAD : begin
             reg_wr_en   = 1;
             alu_src     = 1;
-        end 
+            mem_rd_en   = 1;
+            mem_to_reg  = 1; 
+        end
+        S_TYPE: begin
+            mem_wr_en   = 1;
+            alu_src     = 1;  
+        end
     endcase 
 end
     

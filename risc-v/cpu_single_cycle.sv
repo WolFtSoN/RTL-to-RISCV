@@ -37,7 +37,7 @@ logic [WIDTH-1:0] reg_data1, reg_data2;
 logic [6:0] opcode, funct7;
 logic [2:0] funct3;
 logic [11:0] imm_i;
-
+logic [11:0] imm_s;  
 
 decoder u_decoder (
     .instr(instr),
@@ -47,8 +47,10 @@ decoder u_decoder (
     .rs1(rs1),
     .rs2(rs2),
     .funct7(funct7),
-    .imm_i(imm_i)
+    .imm_i(imm_i),
+    .imm_s(imm_s)
 );
+
 
 // Register File
 // TODO: Instantiate and connect register file
@@ -74,10 +76,12 @@ logic [WIDTH-1:0]   alu_result;
 logic [ALU_OP-1:0]  alu_ctrl_sig;
 logic               branch_taken;
 logic               zero_flag;
-logic [WIDTH-1:0] alu_b;
+logic [WIDTH-1:0]   alu_b;
+logic [WIDTH-1:0]   imm_ext;
 
-assign alu_b = (alu_src) ? {{20{imm_i[11]}}, imm_i} : reg_data2; // 1 = I-type , 0 = R type
+assign imm_ext = (opcode == I_TYPE) ? {{20{imm_i[11]}}, imm_i} : (opcode == S_TYPE) ? {{20{imm_s[11]}}, imm_s} : 32'd0;
 
+assign alu_b = (alu_src) ? imm_ext : reg_data2; // 1 = I-type , 0 = R type
 // ALU
 // TODO: Instantiate and connect ALU
 alu u_alu (
@@ -88,6 +92,7 @@ alu u_alu (
     .zero(zero_flag)
 );
 
+
 // ALU Control
 // TODO: Instantiate and connect ALU control
 alu_ctrl u_alu_ctrl (
@@ -96,6 +101,7 @@ alu_ctrl u_alu_ctrl (
     .funct7(funct7),
     .alu_ctrl(alu_ctrl_sig)
 );
+
 
 //====================
 // MEMORY (for load/store)
@@ -112,6 +118,10 @@ data_mem u_mem (
     .rd_data(data_mem_out)
 );
 
+// always_comb begin
+//     $display("After MEM: reg_data1 = %0d + alu_b = %0d -> alu_result = %0d", reg_data1, alu_b, alu_result);
+// end
+
 //====================
 // WRITEBACK
 //====================
@@ -122,6 +132,7 @@ writeback_mux u_wbmux (
     .mem_to_reg (mem_to_reg),
     .wb_data    (wb_data)
 );
+
 //====================
 // CONTROL UNIT
 //====================
@@ -134,6 +145,7 @@ control_unit u_ctrl (
     .mem_rd_en   (mem_rd_en),
     .mem_to_reg  (mem_to_reg)
 );
+
 
 assign next_pc = pc + 4;
 

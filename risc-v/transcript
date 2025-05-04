@@ -1,6 +1,6 @@
 # do sim.do
 # vsim -c work.tb_cpu 
-# Start time: 13:13:09 on May 04,2025
+# Start time: 23:43:23 on May 04,2025
 # Loading sv_std.std
 # Loading work.tb_cpu
 # Loading work.all_pkgs
@@ -25,10 +25,21 @@
 # Loading work.control_unit_sv_unit
 # Loading work.control_unit
 # ---------------------------------------------
-# x5 = 30
-# x6 = 37
+# R-TYPE:
+# -------
+# T = 35 | x5 = 30
+# T = 35 | x6 = 37
+# I-TYPE:
+# -------
+# T = 65 | x1 = 42
+# T = 65 | x2 = 47
+# S-TYPE:
+# -------
+# T = 95 | x1 = 42
+# T = 95 | x3 = 7
+# MEM[x1+8] <- x3 = 7
 # ---------------------------------------------
-# ** Note: $finish    : D:/RTL100Challange/risc-v/tb_cpu.sv(37)
-#    Time: 110 ps  Iteration: 0  Instance: /tb_cpu
-# End time: 13:13:10 on May 04,2025, Elapsed time: 0:00:01
+# ** Note: $finish    : D:/RTL100Challange/risc-v/tb_cpu.sv(66)
+#    Time: 95 ps  Iteration: 1  Instance: /tb_cpu
+# End time: 23:43:23 on May 04,2025, Elapsed time: 0:00:00
 # Errors: 0, Warnings: 0
