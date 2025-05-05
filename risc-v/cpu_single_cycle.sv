@@ -79,7 +79,10 @@ logic               zero_flag;
 logic [WIDTH-1:0]   alu_b;
 logic [WIDTH-1:0]   imm_ext;
 
-assign imm_ext = (opcode == I_TYPE) ? {{20{imm_i[11]}}, imm_i} : (opcode == S_TYPE) ? {{20{imm_s[11]}}, imm_s} : 32'd0;
+assign imm_ext = (opcode == I_TYPE) ? {{20{imm_i[11]}}, imm_i} :
+                 (opcode == S_TYPE) ? {{20{imm_s[11]}}, imm_s} :
+                 (opcode == I_LOAD) ? {{20{imm_i[11]}}, imm_i} :
+                 32'd0;
 
 assign alu_b = (alu_src) ? imm_ext : reg_data2; // 1 = I-type , 0 = R type
 // ALU
