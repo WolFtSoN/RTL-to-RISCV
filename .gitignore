@@ -6,3 +6,5 @@
 **/wave.do
 **/instr_gen.py
 **/sim.do
+**/.gitignore
+**/.gitattributes

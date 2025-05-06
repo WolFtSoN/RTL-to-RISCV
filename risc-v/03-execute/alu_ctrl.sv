@@ -44,15 +44,18 @@ always_comb begin
         end
         S_TYPE : begin
             case (funct3)
-                3'b010  : alu_ctrl = 4'b0010;       // ADD  
+                3'b000  : alu_ctrl = 4'b0010;       // ADD  
                 default : alu_ctrl = 4'b0000;
             endcase
         end
         I_LOAD  : begin
             case (funct3)
-                3'b010  : alu_ctrl = 4'b0010;       // ADD  
+                3'b000  : alu_ctrl = 4'b0010;       // ADD  
                 default : alu_ctrl = 4'b0000; 
             endcase
+        end
+        B_TYPE  : begin //  branch instructions  always needs to do subtraction
+                alu_ctrl = 4'b0011;       // SUB  
         end
     endcase
 end

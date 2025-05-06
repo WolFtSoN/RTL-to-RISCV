@@ -6,11 +6,11 @@ ALU
 import all_pkgs::*;
 
 module alu (
-    input logic [WIDTH-1:0] a,
-    input logic [WIDTH-1:0] b,
+    input logic signed [WIDTH-1:0] a,
+    input logic signed [WIDTH-1:0] b,
     input logic [ALU_OP-1:0] alu_ctrl,      // Control signal for op
 
-    output logic [WIDTH-1:0] result,
+    output logic signed [WIDTH-1:0] result,
     output logic             zero
 );
     
@@ -30,5 +30,9 @@ always_comb begin
 end
 
 assign zero = (result == 0);
+
+// always_comb begin
+//     $display("alu_ctrl = %4b | a = %0d | b = %0d", alu_ctrl, a, b);
+// end
 
 endmodule

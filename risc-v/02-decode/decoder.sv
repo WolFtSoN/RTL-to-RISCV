@@ -17,7 +17,11 @@ module decoder (
     // I-type
     output logic [11:0] imm_i,   
     // S-type
-    output logic [11:0] imm_s
+    output logic [11:0] imm_s,
+    // B-type
+    output logic [11:0] imm_b,
+    // J-type
+    output logic [19:0] imm_j
 );
 
 // TODO: Extract fields from instruction
@@ -36,6 +40,16 @@ assign imm_i    = instr [31:20];
 
 // S-type
 assign imm_s    = {instr[31:25], instr[11:7]};
+
+// B-type
+assign imm_b    = {instr[31], instr[7] , instr[30:25], instr[11:8]};    // imm_b[11:0]  
+
+// J-type
+assign imm_j    = {instr[31], instr[19:12], instr[20], instr[30:21]};   // imm_j[19:0]  
+
+// always_comb begin
+//     $display("instr[31] = %0b | instr[7] = %0b | instr[30:25] = %6b | instr[11:8] = %4b"  , instr[31], instr[7], instr[30:25], instr[11:8]);
+// end
 
     
 endmodule

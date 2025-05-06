@@ -23,12 +23,24 @@ Each folder contains RTL modules and testbenches with waveform verification.
 
 The `risc-v/` directory holds a complete 32-bit RISC-V CPU implemented in SystemVerilog. Features include:
 
-- **Instruction support**: R-type, I-type (`addi`), S-type (`sw`), B-type (`beq`), load (`lw`)
-- **Assembler**: Python script to convert `add x5, x1, x2` into 32-bit machine code (`riscv_assembler.py`)
-- **Testbench**: Loads `.hex` or `.bit` files and verifies CPU output
-- **Module separation**: Fetch, Decode, Execute, Memory, Writeback, Control Unit
+- **Instruction support**: 
+  - **R-type**: `add`, `sub`, `and`, `or`, `slt`, `nor`  
+  - **I-type**: `addi`, `subi`, `andi`, `ori`, `slti`, `nori`, `jalr`  
+  - **S-type**: `sw`
+  - **B-type**: `beq`, `bne`
+  - **Load**:   `lw`
+  - **J-type**: `jal`
+- **Assembler**: 
+  - Python script (`riscv_assembler.py`) to convert human-readable assembly (e.g., `add x5, x1, x2`) into 32-bit machine code
+- **Modular RTL Design**:
+  - Clean separation into Fetch, Decode, Execute, Memory, Writeback, and Control stages
+- **Testbench**: 
+  - Loads `.hex` or `.bit` instruction files, checks register/memory state, and enables waveform-based validation
 
-Future goals: pipelining, forwarding, UART integration.
+#### 🛠️ Planned Extensions:
+- Add `lui`, `auipc` (U-type) to complete RV32I
+- Pipeline architecture with hazard handling
+- UART peripheral integration
 
 ---
 
