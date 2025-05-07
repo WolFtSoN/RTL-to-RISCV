@@ -9,8 +9,6 @@ cpu_single_cycle u_cpu (
 
 always #5 clk = ~clk;
 
-int NUM_INSTRUCTIONS = 0;
-
 initial begin
     $display("---------------------------------------------");
     clk = 0; rst = 1;
@@ -177,18 +175,17 @@ initial begin
     // ####### Prime Checker #######     
     // ############################# 
 
-    // $display("\nPrime Checker:\n-------");
+    $display("\nPrime Checker:\n-------");
 
-    // // repeat(2*NUM_INSTRUCTIONS + 1) @(posedge clk); // Make sure to give it enough time
-    // wait(u_cpu.halt);
+    wait(u_cpu.halt);
 
-    // $display("x0 = %0d", u_cpu.u_regfile.regs[0]);
-    // $display("x10 = %0d", u_cpu.u_regfile.regs[10]);
-    // $display("x1 = %0d", u_cpu.u_regfile.regs[1]);
-    // $display("x2 = %0d <-- isPrime", u_cpu.u_regfile.regs[2]);
-    // $display("x3 = %0d <-- remainder", u_cpu.u_regfile.regs[3]);
+    $display("x0 = %0d", u_cpu.u_regfile.regs[0]);
+    $display("x10 = %0d", u_cpu.u_regfile.regs[10]);
+    $display("x1 = %0d", u_cpu.u_regfile.regs[1]);
+    $display("x2 = %0d <-- isPrime", u_cpu.u_regfile.regs[2]);
+    $display("x3 = %0d <-- remainder", u_cpu.u_regfile.regs[3]);
     
-    // $display("x2 = %0d => %s", u_cpu.u_regfile.regs[2], (u_cpu.u_regfile.regs[2] == 1) ? "prime" : "not prime");
+    $display("x2 = %0d => %s", u_cpu.u_regfile.regs[2], (u_cpu.u_regfile.regs[2] == 1) ? "prime" : "not prime");
 
     $display("\n---------------------------------------------");
     $finish;
@@ -199,18 +196,5 @@ always_ff @(posedge clk) begin
         $display("PC = %2d | INSTR = %b | OPCODE = %b", u_cpu.pc, u_cpu.instr, u_cpu.opcode);
     end
 end
-
-initial begin
-    automatic int fd;
-    string line;
-    fd = $fopen("instructions.bit", "r");
-    while (!$feof(fd)) begin
-        void'($fgets(line, fd));
-        NUM_INSTRUCTIONS++;
-    end
-    $fclose(fd);
-    $display("Loaded %0d instructions", NUM_INSTRUCTIONS);
-end
-
     
 endmodule

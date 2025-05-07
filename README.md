@@ -20,6 +20,11 @@ Each folder contains RTL modules and testbenches with waveform verification.
 ---
 
 ### RISC-V Single-Cycle CPU (RV32IM)
+<p align="center">
+  <img src="risc-v/waveform.png" alt="Waveform of Prime Checker" width="600"/><br/>
+  <em>Waveform of Prime Checker</em>
+</p>
+
 
 The `risc-v/` directory holds a complete 32-bit RISC-V CPU implemented in SystemVerilog. Features include:
 

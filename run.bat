@@ -98,10 +98,14 @@ set "do_file=sim.do"
 (
     echo vsim -c work.%top_module%
     if "%wave_option%"=="-wave" (
-        echo add wave *
-        echo log -r /*
+        echo vcd file waveform.vcd
+        echo vcd add -r /%top_module%/*
+        echo run -all
+        echo vcd flush
+        echo vcd off
+    ) else (
+        echo run -all
     )
-    echo run -all
 ) > %do_file%
 
 :: -----------------------------
@@ -109,7 +113,9 @@ set "do_file=sim.do"
 :: -----------------------------
 echo Running simulation...
 if "%wave_option%"=="-wave" (
-    vsim -do %do_file%
+    @REM Run and check with ModelSim, and waveform with gtkwave
+    vsim -c -do %do_file%   
+    gtkwave waveform.vcd
 ) else (
     vsim -c -do %do_file%
 )

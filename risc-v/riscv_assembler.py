@@ -249,49 +249,49 @@ def assemble(instr):
 # ]
 
 ## Test for M-extension
-instructions = [
-    "addi x1, x0, 10"   ,     # x1 = 10
-    "addi x12, x0, 12"  ,     # x12 = 12
-    "addi x2, x0, 3"    ,     # x2 = 3
-
-    "mul x3, x1, x2"    ,     # x3 = 30
-    "mulh x4, x1, x2"   ,     # x4 = upper 32 bits of signed(10 * 3) = 0
-    "mulhu x5, x1, x2"  ,     # x5 = upper 32 bits of unsigned(10 * 3) = 0
-    "mulhsu x6, x1, x2" ,     # x6 = upper 32 bits of signed(10) * unsigned(3) = 0
-
-    "rem x7, x1, x2"    ,     # x7 = 10 % 3 = 1
-    "remu x8, x1, x2"   ,     # x8 = 10 % 3 = 1
-
-    "div x9, x12, x2"   ,     # x9 = 12 / 3 = 4
-    "divu x10, x12, x2"  ,     # x10 = 12 / 3 = 4
-    "halt",
-]
-
-## Test Prime Checker
 # instructions = [
-#     ".text"
+#     "addi x1, x0, 10"   ,     # x1 = 10
+#     "addi x12, x0, 12"  ,     # x12 = 12
+#     "addi x2, x0, 3"    ,     # x2 = 3
 
-#     "main:"          ,               
-#         "li x10, 11" ,               # pc = 0    | n = 10
-#         "li x1, 2"   ,               # pc = 4    | i = 2
-#         "li x2, 1"   ,               # pc = 8    | isPrime = 1 (assume prime)
+#     "mul x3, x1, x2"    ,     # x3 = 30
+#     "mulh x4, x1, x2"   ,     # x4 = upper 32 bits of signed(10 * 3) = 0
+#     "mulhu x5, x1, x2"  ,     # x5 = upper 32 bits of unsigned(10 * 3) = 0
+#     "mulhsu x6, x1, x2" ,     # x6 = upper 32 bits of signed(10) * unsigned(3) = 0
 
-#     "loop:"                      ,   
-#         "bge x1, x10, done"      ,   # pc = 12   | if i >= n → done
-#         "rem x3, x10, x1"        ,   # pc = 16   | x3 = x10 % x1
-#         "beq x3, x0, not_prime"  ,   # pc = 20   | if rem == 0 → not_prime
-#         "addi x1, x1, 1"         ,   # pc = 24   | i++
-#         "j loop"                 ,   # pc = 28
-    
-#     "not_prime:"   ,                
-#         "li x2, 0" ,                # pc = 32
+#     "rem x7, x1, x2"    ,     # x7 = 10 % 3 = 1
+#     "remu x8, x1, x2"   ,     # x8 = 10 % 3 = 1
 
-#     "done:"        ,                  
-#         "nop"      ,                # pc = 36      
-#         # if x10 == 1 -> n is prime
-#         # if x10 == 0 -> n is not prime
+#     "div x9, x12, x2"   ,     # x9 = 12 / 3 = 4
+#     "divu x10, x12, x2"  ,     # x10 = 12 / 3 = 4
 #     "halt",
 # ]
+
+## Test Prime Checker
+instructions = [
+    ".text"
+
+    "main:"          ,               
+        "li x10, 11" ,               # pc = 0    | n = 10
+        "li x1, 2"   ,               # pc = 4    | i = 2
+        "li x2, 1"   ,               # pc = 8    | isPrime = 1 (assume prime)
+
+    "loop:"                      ,   
+        "bge x1, x10, done"      ,   # pc = 12   | if i >= n → done
+        "rem x3, x10, x1"        ,   # pc = 16   | x3 = x10 % x1
+        "beq x3, x0, not_prime"  ,   # pc = 20   | if rem == 0 → not_prime
+        "addi x1, x1, 1"         ,   # pc = 24   | i++
+        "j loop"                 ,   # pc = 28
+    
+    "not_prime:"   ,                
+        "li x2, 0" ,                # pc = 32
+
+    "done:"        ,                  
+        "nop"      ,                # pc = 36      
+        # if x10 == 1 -> n is prime
+        # if x10 == 0 -> n is not prime
+    "halt",
+]
 
 # Generate binary output
 # def write_to_file(filename, instructions):
