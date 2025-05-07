@@ -27,7 +27,7 @@ always_comb begin
                 10'b0000000000  : alu_ctrl = ALU_ADD;         // ADD
                 10'b0100000000  : alu_ctrl = ALU_SUB;         // SUB
                 10'b0000000010  : alu_ctrl = ALU_SLT;         // SLT
-                10'b0000001100  : alu_ctrl = ALU_NOR;         // NOR
+                10'b0000000100  : alu_ctrl = ALU_NOR;         // NOR
                 
                 10'b0000001000  : alu_ctrl = ALU_MUL;         // MUL - lower 32 bits | signed × signed
                 10'b0000001001  : alu_ctrl = ALU_MULH;        // MUL - upper 32 bits | signed × signed
@@ -36,6 +36,10 @@ always_comb begin
 
                 10'b0000001110  : alu_ctrl = ALU_REM;         // REM - signed % signed
                 10'b0000001111  : alu_ctrl = ALU_REMU;        // REM - unsigned % unsigned
+
+                10'b0000001100 : alu_ctrl = ALU_DIV;          // DIV - signed
+                10'b0000001101 : alu_ctrl = ALU_DIVU;         // DIVU - unsigned
+
                 default : alu_ctrl = {ALU_OP{1'b0}};
             endcase
         end
@@ -67,5 +71,9 @@ always_comb begin
         end
     endcase
 end
+
+// always_comb begin
+//     $display("alu_ctrl = %5b | funct7 = %7b | funct3 = %3b", alu_ctrl, funct7, funct3);
+// end
     
 endmodule

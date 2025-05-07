@@ -148,9 +148,11 @@ initial begin
 
     // $display("\nM-EXTENSION:\n-------");
 
-    // repeat(9) @(posedge clk); 
+    // wait(u_cpu.halt);
 
     // $display("\nT = %2t | x1 = x0 + 10 = %0d\n" ,$time , u_cpu.u_regfile.regs[1]);
+
+    // $display("T = %2t | x12 = x0 + 12  = %0d\n" ,$time , u_cpu.u_regfile.regs[12]);
 
     // $display("T = %2t | x2 = x0 + 3  = %0d\n" ,$time , u_cpu.u_regfile.regs[2]);
 
@@ -166,23 +168,27 @@ initial begin
     
     // $display("T = %2t | unsigned: x8 = modulo(x1, x2) = %0d\n" ,$time , u_cpu.u_regfile.regs[8]);
 
+    // $display("T = %2t | signed: x9 = x12 / x2 = %0d\n" ,$time , u_cpu.u_regfile.regs[9]);
+
+    // $display("T = %2t | unsigned: x10 = x12 / x2 = %0d\n" ,$time , u_cpu.u_regfile.regs[10]);
+
 
     // #############################
     // ####### Prime Checker #######     
     // ############################# 
 
-    $display("\nPrime Checker:\n-------");
+    // $display("\nPrime Checker:\n-------");
 
-    // repeat(2*NUM_INSTRUCTIONS + 1) @(posedge clk); // Make sure to give it enough time
-    wait(u_cpu.halt);
+    // // repeat(2*NUM_INSTRUCTIONS + 1) @(posedge clk); // Make sure to give it enough time
+    // wait(u_cpu.halt);
 
-    $display("x0 = %0d", u_cpu.u_regfile.regs[0]);
-    $display("x10 = %0d", u_cpu.u_regfile.regs[10]);
-    $display("x1 = %0d", u_cpu.u_regfile.regs[1]);
-    $display("x2 = %0d <-- isPrime", u_cpu.u_regfile.regs[2]);
-    $display("x3 = %0d <-- remainder", u_cpu.u_regfile.regs[3]);
+    // $display("x0 = %0d", u_cpu.u_regfile.regs[0]);
+    // $display("x10 = %0d", u_cpu.u_regfile.regs[10]);
+    // $display("x1 = %0d", u_cpu.u_regfile.regs[1]);
+    // $display("x2 = %0d <-- isPrime", u_cpu.u_regfile.regs[2]);
+    // $display("x3 = %0d <-- remainder", u_cpu.u_regfile.regs[3]);
     
-    $display("x2 = %0d => %s", u_cpu.u_regfile.regs[2], (u_cpu.u_regfile.regs[2] == 1) ? "prime" : "not prime");
+    // $display("x2 = %0d => %s", u_cpu.u_regfile.regs[2], (u_cpu.u_regfile.regs[2] == 1) ? "prime" : "not prime");
 
     $display("\n---------------------------------------------");
     $finish;

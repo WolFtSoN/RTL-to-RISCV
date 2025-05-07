@@ -25,6 +25,9 @@ parameter ALU_MULHU  = 5'b01001;
 parameter ALU_REM    = 5'b01010;
 parameter ALU_REMU   = 5'b01011;
 
+parameter ALU_DIV    = 5'b01100;
+parameter ALU_DIVU   = 5'b01101;
+
 // B-type options
 parameter BR_NONE = 3'b000;
 parameter BR_EQ = 3'b010;

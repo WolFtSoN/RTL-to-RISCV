@@ -46,6 +46,9 @@ always_comb begin
         end
         ALU_REM  : result = b == 0 ? 0 : $signed(a) % $signed(b); // REM - signed % signed
         ALU_REMU : result = b == 0 ? 0 : a % b;                   // REM - unsigned % unsigned
+
+        ALU_DIV  : result = b == 0 ? 0 : $signed(a) / $signed(b); // DIV - signed / signed
+        ALU_DIVU : result = b == 0 ? 0 : a / b;                   // DIV - unsigned / unsigned
         default : result = {WIDTH{1'b0}};
     endcase
 end
@@ -53,7 +56,8 @@ end
 assign zero = (result == 0);
 
 // always_comb begin
-//     $display("alu_ctrl = %4b | a = %0d | b = %0d", alu_ctrl, a, b);
+//     if (alu_ctrl == ALU_DIV)
+//         $display("alu_ctrl = %5b | a = %0d | b = %0d", alu_ctrl, a, b);
 // end
 
 endmodule
