@@ -57,6 +57,7 @@ always_comb begin
             case (funct3)
                 3'b010 : branch_op = BR_EQ;
                 3'b001 : branch_op = BR_NE; 
+                3'b101 : branch_op = BR_GE;
                 default : branch_op = BR_NONE;
             endcase
         end

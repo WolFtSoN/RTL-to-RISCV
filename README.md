@@ -27,9 +27,11 @@ The `risc-v/` directory holds a complete 32-bit RISC-V CPU implemented in System
   - **R-type**: `add`, `sub`, `and`, `or`, `slt`, `nor`  
   - **I-type**: `addi`, `subi`, `andi`, `ori`, `slti`, `nori`, `jalr`  
   - **S-type**: `sw`
-  - **B-type**: `beq`, `bne`
+  - **B-type**: `beq`, `bne`, `bge`
   - **Load**:   `lw`
   - **J-type**: `jal`
+  - **M-extension (partial)**: `mul`, `mulh`, `mulhsu`, `mulhu`, `rem`, `remu`
+  - **Control-flow logic**: Verified with Prime Checker program
 - **Assembler**: 
   - Python script (`riscv_assembler.py`) to convert human-readable assembly (e.g., `add x5, x1, x2`) into 32-bit machine code
 - **Modular RTL Design**:

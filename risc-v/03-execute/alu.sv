@@ -6,25 +6,46 @@ ALU
 import all_pkgs::*;
 
 module alu (
-    input logic signed [WIDTH-1:0] a,
-    input logic signed [WIDTH-1:0] b,
+    input logic [WIDTH-1:0] a,
+    input logic [WIDTH-1:0] b,
     input logic [ALU_OP-1:0] alu_ctrl,      // Control signal for op
 
-    output logic signed [WIDTH-1:0] result,
+    output logic [WIDTH-1:0] result,
     output logic             zero
 );
     
 // TODO: Implement ALU operation selection
 // TODO: Set zero flag if result == 0
 
+// For multiplication and division operations
+logic signed [2*WIDTH-1:0] full_result;
+
 always_comb begin 
     case (alu_ctrl)
-        4'b0000 : result = a & b;           // AND
-        4'b0001 : result = a | b;           // OR 
-        4'b0010 : result = a + b;           // ADD
-        4'b0011 : result = a - b;           // SUB
-        4'b0100 : result = (a < b);         // SLT - set if less than
-        4'b0101 : result = ~(a | b);        // NOR
+        ALU_AND : result = a & b;                                 // AND
+        ALU_OR  : result = a | b;                                 // OR 
+        ALU_ADD : result = a + b;                                 // ADD
+        ALU_SUB : result = a - b;                                 // SUB
+        ALU_SLT : result = {{(WIDTH-1){1'b0}}, (a < b)};          // SLT - set if less than
+        ALU_NOR : result = ~(a | b);                              // NOR
+        ALU_MUL : begin                                           // MUL - lower 32 bits | signed × signed
+                    full_result = $signed(a) * $signed(b);      
+                    result = full_result[31:0]; 
+                end
+        ALU_MULH : begin                                          // MUL - upper 32 bits | signed × signed
+                    full_result = $signed(a) * $signed(b);      
+                    result = full_result[63:32]; 
+        end
+        ALU_MULHU : begin                                         // MUL - upper 32 bits | unsigned × unsigned
+                    full_result = a * b;      
+                    result = full_result[63:32]; 
+        end
+        ALU_MULHSU : begin                                        // MUL - upper 32 bits | signed × unsigned
+                    full_result = $signed(a) * b;      
+                    result = full_result[63:32]; 
+        end
+        ALU_REM  : result = b == 0 ? 0 : $signed(a) % $signed(b); // REM - signed % signed
+        ALU_REMU : result = b == 0 ? 0 : a % b;                   // REM - unsigned % unsigned
         default : result = {WIDTH{1'b0}};
     endcase
 end

@@ -9,6 +9,8 @@ cpu_single_cycle u_cpu (
 
 always #5 clk = ~clk;
 
+int NUM_INSTRUCTIONS = 0;
+
 initial begin
     $display("---------------------------------------------");
     clk = 0; rst = 1;
@@ -96,21 +98,17 @@ initial begin
 
     // $display("\nB-TYPE:\n-------");
 
-    // repeat(6) @(posedge clk);  // run the CPU for 10 cycles
+    // repeat(6) @(posedge clk);
 
-    // $display("T = %2t | x2 = x2 + 42 = %0d\n" ,$time , u_cpu.u_regfile.regs[2]);
+    // $display("T = %2t | x2 = x0 + 42 = %0d\n" ,$time , u_cpu.u_regfile.regs[2]);
 
-    // $display("T = %2t | x3 = x1 + 42 = %0d\n" ,$time , u_cpu.u_regfile.regs[3]);
+    // $display("T = %2t | x3 = x0 + 30 = %0d\n" ,$time , u_cpu.u_regfile.regs[3]);
 
-    // $display("------- beq  x2, x3, -8 -> skip next -------");
+    // $display("------- beq  x2, x3, 8 -> skip next -------");
 
     // $display("T = %2t | x4 = x0 + 99 = %0d\n" ,$time , u_cpu.u_regfile.regs[4]);
 
     // $display("T = %2t | x5 = x0 + 7 = %0d\n" ,$time , u_cpu.u_regfile.regs[5]);
-
-    // $display("T = %2t | x6 = x0 + 10 = %0d\n" ,$time , u_cpu.u_regfile.regs[6]);
-
-    // $display("T = %2t | x2 = x2 + 42 = %0d\n" ,$time , u_cpu.u_regfile.regs[2]);
 
     // ######################
     // ####### J-TYPE #######     
@@ -118,7 +116,7 @@ initial begin
 
     // $display("\nJ-TYPE:\n-------");
 
-    // repeat(6) @(posedge clk);  // run the CPU for 10 cycles
+    // repeat(6) @(posedge clk); 
 
     // $display("\nT = %2t | x1 = x0 + 42 = %0d\n" ,$time , u_cpu.u_regfile.regs[1]);
 
@@ -132,17 +130,59 @@ initial begin
     // ####### JARL-TYPE #######     
     // #########################    
 
-    $display("\nJALR-TYPE:\n-------");
+    // $display("\nJALR-TYPE:\n-------");
 
-    repeat(6) @(posedge clk);  // run the CPU for 10 cycles
+    // repeat(6) @(posedge clk); 
 
-    $display("\nT = %2t | x1 = x0 + 4 = %0d\n" ,$time , u_cpu.u_regfile.regs[1]);
+    // $display("\nT = %2t | x1 = x0 + 4 = %0d\n" ,$time , u_cpu.u_regfile.regs[1]);
 
-    $display("T = %2t | jalr x2, 0(x1) -> x2 = %0d\n" ,$time , u_cpu.u_regfile.regs[2]);
+    // $display("T = %2t | jalr x2, 0(x1) -> x2 = %0d\n" ,$time , u_cpu.u_regfile.regs[2]);
 
-    $display("T = %2t | x3 = x0 + 99 = %0d\n" ,$time , u_cpu.u_regfile.regs[3]);
+    // $display("T = %2t | x3 = x0 + 99 = %0d\n" ,$time , u_cpu.u_regfile.regs[3]);
 
-    $display("T = %2t | x4= x0 + 7 = %0d\n" ,$time , u_cpu.u_regfile.regs[4]);
+    // $display("T = %2t | x4= x0 + 7 = %0d\n" ,$time , u_cpu.u_regfile.regs[4]);
+
+    // ###########################
+    // ####### M-EXTENSION #######     
+    // ###########################    
+
+    // $display("\nM-EXTENSION:\n-------");
+
+    // repeat(9) @(posedge clk); 
+
+    // $display("\nT = %2t | x1 = x0 + 10 = %0d\n" ,$time , u_cpu.u_regfile.regs[1]);
+
+    // $display("T = %2t | x2 = x0 + 3  = %0d\n" ,$time , u_cpu.u_regfile.regs[2]);
+
+    // $display("T = %2t | upper 32 bits of signed(10 * 3): x3 = x1 * x2 = %0d\n" ,$time , u_cpu.u_regfile.regs[3]);
+
+    // $display("T = %2t | upper 32 bits of unsigned(10 * 3): x4 = x1 * x2 = %0d\n" ,$time , u_cpu.u_regfile.regs[4]);
+    
+    // $display("T = %2t | upper 32 bits of unsigned(10 * 3): x5 = x1 * x2 = %0d\n" ,$time , u_cpu.u_regfile.regs[5]);
+    
+    // $display("T = %2t | upper 32 bits of signed(10) * unsigned(3): x6 = x1 * x2 = %0d\n" ,$time , u_cpu.u_regfile.regs[6]);
+    
+    // $display("T = %2t | signed: x7 = modulo(x1, x2) = %0d\n" ,$time , u_cpu.u_regfile.regs[7]);
+    
+    // $display("T = %2t | unsigned: x8 = modulo(x1, x2) = %0d\n" ,$time , u_cpu.u_regfile.regs[8]);
+
+
+    // #############################
+    // ####### Prime Checker #######     
+    // ############################# 
+
+    $display("\nPrime Checker:\n-------");
+
+    // repeat(2*NUM_INSTRUCTIONS + 1) @(posedge clk); // Make sure to give it enough time
+    wait(u_cpu.halt);
+
+    $display("x0 = %0d", u_cpu.u_regfile.regs[0]);
+    $display("x10 = %0d", u_cpu.u_regfile.regs[10]);
+    $display("x1 = %0d", u_cpu.u_regfile.regs[1]);
+    $display("x2 = %0d <-- isPrime", u_cpu.u_regfile.regs[2]);
+    $display("x3 = %0d <-- remainder", u_cpu.u_regfile.regs[3]);
+    
+    $display("x2 = %0d => %s", u_cpu.u_regfile.regs[2], (u_cpu.u_regfile.regs[2] == 1) ? "prime" : "not prime");
 
     $display("\n---------------------------------------------");
     $finish;
@@ -152,6 +192,18 @@ always_ff @(posedge clk) begin
     if (!rst) begin
         $display("PC = %2d | INSTR = %b | OPCODE = %b", u_cpu.pc, u_cpu.instr, u_cpu.opcode);
     end
+end
+
+initial begin
+    automatic int fd;
+    string line;
+    fd = $fopen("instructions.bit", "r");
+    while (!$feof(fd)) begin
+        void'($fgets(line, fd));
+        NUM_INSTRUCTIONS++;
+    end
+    $fclose(fd);
+    $display("Loaded %0d instructions", NUM_INSTRUCTIONS);
 end
 
     

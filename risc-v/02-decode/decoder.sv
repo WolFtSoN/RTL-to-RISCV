@@ -48,7 +48,7 @@ assign imm_b    = {instr[31], instr[7] , instr[30:25], instr[11:8]};    // imm_b
 assign imm_j    = {instr[31], instr[19:12], instr[20], instr[30:21]};   // imm_j[19:0]  
 
 // always_comb begin
-//     $display("instr[31] = %0b | instr[7] = %0b | instr[30:25] = %6b | instr[11:8] = %4b"  , instr[31], instr[7], instr[30:25], instr[11:8]);
+//     $display("instr[31] = %0b | instr[19:12] = %0b | instr[20] = %0b | instr[30:21] = %0b"  , instr[31],instr[19:12], instr[20], instr[30:21]);
 // end
 
     

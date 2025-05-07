@@ -7,6 +7,7 @@ module cpu_single_cycle(
 
 logic [WIDTH-1:0] wb_data;
 logic reg_wr_en, alu_src, mem_wr_en, mem_rd_en, mem_to_reg;
+logic halt;
  //====================
 // FETCH
 //====================
@@ -82,7 +83,7 @@ logic               branch_taken, branch;
 logic [2:0]         branch_op;
 logic               zero_flag;
 logic [WIDTH-1:0]   alu_b;
-logic [WIDTH-1:0]   imm_ext;
+logic signed [WIDTH-1:0]   imm_ext;
 
 assign imm_ext = (opcode == I_TYPE)     ? {{20{imm_i[11]}}, imm_i} :
                  (opcode == S_TYPE)     ? {{20{imm_s[11]}}, imm_s} :
@@ -103,7 +104,9 @@ alu u_alu (
     .zero(zero_flag)
 );
 
-assign branch_taken = (branch_op == BR_EQ && zero_flag) || (branch_op == BR_NE && !zero_flag);
+assign branch_taken =   (branch_op == BR_EQ && zero_flag) || 
+                        (branch_op == BR_NE && !zero_flag) ||
+                        (branch_op == BR_GE && !(reg_data1 < reg_data2));
 
 // ALU Control
 // TODO: Instantiate and connect ALU control
@@ -175,9 +178,13 @@ assign next_pc =    (opcode == J_TYPE)      ? (pc + imm_ext) :
                     (opcode == JALR_TYPE)   ? ((reg_data1 + imm_ext) & ~32'd1) :
                     (branch_taken)          ? (pc + imm_ext) : 
                     pc + 4;
+                    
+// To stop the tb at the right cycle                    
+assign halt = (instr == HALT);
 
 // always_comb begin
-//     $display("reg_data1: %0b | imm_ext = %0d | = pc %0d", reg_data1, imm_ext, pc);
+//     if (opcode == J_TYPE)
+//         $display("reg_data1: %0b | imm_ext_d = %0d | imm_ext_b = %0b  | = pc %0d", reg_data1, imm_ext, imm_ext, pc);
 // end
 
 endmodule
