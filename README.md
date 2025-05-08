@@ -141,7 +141,7 @@ The `risc-v/` directory holds a complete 32-bit RISC-V CPU implemented in System
 │   │        └── tb_top_system.sv
 │   │     
 │   └── risc-v
-│       │── 01-round_robin_arbiter
+│       │── 01-fetch
 │       │    │── instr_mem.sv
 │       │    └── pc_register.sv
 |       |

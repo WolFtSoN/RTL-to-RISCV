@@ -98,14 +98,14 @@ set "do_file=sim.do"
 (
     echo vsim -c work.%top_module%
     if "%wave_option%"=="-wave" (
+        @REM echo add wave *
+        @REM echo log -r /*
         echo vcd file waveform.vcd
-        echo vcd add -r /%top_module%/*
-        echo run -all
+        echo vcd add -r /*
         echo vcd flush
         echo vcd off
-    ) else (
-        echo run -all
     )
+    echo run -all
 ) > %do_file%
 
 :: -----------------------------
