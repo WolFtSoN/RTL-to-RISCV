@@ -29,11 +29,11 @@ instr_mem u_imem (
     .addr(pc),
     .instr(instr)
 );
-
+                
 //====================
 // DECODE
 //====================
-logic [STAGE_W-1:0] rs1, rs2, rd;
+logic [4:0] rs1, rs2, rd;
 logic signed [WIDTH-1:0] reg_data1, reg_data2;
 logic [6:0] opcode, funct7;
 logic [2:0] funct3;

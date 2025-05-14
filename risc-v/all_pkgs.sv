@@ -3,7 +3,6 @@ package all_pkgs;
 parameter WIDTH = 32;
 parameter ADDR_W = $clog2(WIDTH);
 parameter DATA_W = 32;
-parameter STAGE_W = 5;
 parameter ALU_OP = 5;
 parameter HALT = 32'b00000000000000000000000001111111;
 
