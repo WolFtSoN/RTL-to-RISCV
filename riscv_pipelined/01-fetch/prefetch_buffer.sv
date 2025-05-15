@@ -1,7 +1,7 @@
 /*
 A small FIFO\register array:
     - Stores upcoming inctructions fetched from memory
-    - Let's the CPU keep moving even if instuction memory is slow
+    - Let's the CPU keep moving even if instruction memory is slow
     - Can support multi-cycle or burst instruction fetching
 */
 

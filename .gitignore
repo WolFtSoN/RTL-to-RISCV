@@ -8,5 +8,4 @@
 **/sim.do
 **/.gitignore
 **/.gitattributes
-**/riscv_pipelined
 **/waveform.vcd
