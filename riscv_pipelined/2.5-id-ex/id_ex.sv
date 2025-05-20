@@ -26,6 +26,9 @@ module id_ex (
     input logic [2:0]           funct3,
     input logic [6:0]           funct7,
     input logic [6:0]           opcode,
+    input logic                 reg_wr_en,
+    input logic                 mem_to_reg,
+    input logic [1:0]           wb_sel,
 
     output logic [WIDTH-1:0]    ex_pc,
     output logic [WIDTH-1:0]    ex_reg_data1,
@@ -36,7 +39,10 @@ module id_ex (
     output logic [4:0]          ex_rd,
     output logic [2:0]          ex_funct3,
     output logic [6:0]          ex_funct7,
-    output logic [6:0]          ex_opcode
+    output logic [6:0]          ex_opcode,
+    output logic                ex_reg_wr_en,
+    output logic                ex_mem_to_reg,
+    output logic [1:0]          ex_wb_sel
 );
 
 // TODO: Register all inputs (Reset or Flush = 0 | Stall = hold)
@@ -52,6 +58,9 @@ always_ff @(posedge clk or posedge rst) begin
         ex_funct3       <= 0;
         ex_funct7       <= 0;
         ex_opcode       <= 0;
+        ex_reg_wr_en    <= 0;
+        ex_mem_to_reg   <= 0;
+        ex_wb_sel       <= 0;
     end
     else begin
         if (!stall) begin
@@ -65,6 +74,9 @@ always_ff @(posedge clk or posedge rst) begin
             ex_funct3       <= funct3;
             ex_funct7       <= funct7;
             ex_opcode       <= opcode;
+            ex_reg_wr_en    <= reg_wr_en;
+            ex_mem_to_reg   <= mem_to_reg;
+            ex_wb_sel       <= wb_sel;
         end
     end
 end
