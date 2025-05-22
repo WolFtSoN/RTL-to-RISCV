@@ -29,6 +29,9 @@ module id_ex (
     input logic                 reg_wr_en,
     input logic                 mem_to_reg,
     input logic [1:0]           wb_sel,
+    input logic                 alu_src,
+    input logic [WIDTH-1:0]     pc_plus4,
+    input logic                 mem_wr_en,
 
     output logic [WIDTH-1:0]    ex_pc,
     output logic [WIDTH-1:0]    ex_reg_data1,
@@ -42,12 +45,15 @@ module id_ex (
     output logic [6:0]          ex_opcode,
     output logic                ex_reg_wr_en,
     output logic                ex_mem_to_reg,
-    output logic [1:0]          ex_wb_sel
+    output logic [1:0]          ex_wb_sel,
+    output logic                ex_alu_src,
+    output logic [WIDTH-1:0]    ex_pc_plus4,
+    output logic                ex_mem_wr_en
 );
 
 // TODO: Register all inputs (Reset or Flush = 0 | Stall = hold)
 always_ff @(posedge clk or posedge rst) begin
-    if (rst | flush) begin
+    if (rst) begin
         ex_pc           <= {WIDTH{1'b0}};
         ex_reg_data1    <= {WIDTH{1'b0}};
         ex_reg_data2    <= {WIDTH{1'b0}};
@@ -61,9 +67,28 @@ always_ff @(posedge clk or posedge rst) begin
         ex_reg_wr_en    <= 0;
         ex_mem_to_reg   <= 0;
         ex_wb_sel       <= 0;
-    end
-    else begin
-        if (!stall) begin
+        ex_alu_src      <= 0;
+        ex_pc_plus4     <= 0;
+        ex_mem_wr_en    <= 0;
+    end else if (!stall) begin
+        if (flush) begin
+            ex_pc           <= {WIDTH{1'b0}};
+            ex_reg_data1    <= {WIDTH{1'b0}};
+            ex_reg_data2    <= {WIDTH{1'b0}};
+            ex_imm_ext      <= {WIDTH{1'b0}};
+            ex_rs1          <= 0;
+            ex_rs2          <= 0;
+            ex_rd           <= 0;
+            ex_funct3       <= 0;
+            ex_funct7       <= 0;
+            ex_opcode       <= 0;
+            ex_reg_wr_en    <= 0;
+            ex_mem_to_reg   <= 0;
+            ex_wb_sel       <= 0;
+            ex_alu_src      <= 0;
+            ex_pc_plus4     <= 0;
+            ex_mem_wr_en    <= 0;
+        end else begin
             ex_pc           <= id_pc;
             ex_reg_data1    <= reg_data1;
             ex_reg_data2    <= reg_data2;
@@ -77,6 +102,9 @@ always_ff @(posedge clk or posedge rst) begin
             ex_reg_wr_en    <= reg_wr_en;
             ex_mem_to_reg   <= mem_to_reg;
             ex_wb_sel       <= wb_sel;
+            ex_alu_src      <= alu_src;
+            ex_pc_plus4     <= pc_plus4;
+            ex_mem_wr_en    <= mem_wr_en;
         end
     end
 end

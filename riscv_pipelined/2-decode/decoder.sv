@@ -38,12 +38,16 @@ assign funct7   = instr[31:25];
 assign imm_i = instr[31:20];
 assign imm_s = {instr[31:25], instr[11:7]};
 assign imm_b = {instr[31], instr[7], instr[30:25], instr[11:8]};
-assign imm_j = {instr[31], instr[19:11], instr[20], instr[30:21]};
+assign imm_j = {instr[31], instr[19:12], instr[20], instr[30:21]};
 
 assign imm_ext = (opcode == I_TYPE || opcode == I_LOAD || opcode == JALR_TYPE) ? {{20{imm_i[11]}}, imm_i} :
                  (opcode == S_TYPE) ? {{20{imm_s[11]}}, imm_s} :
                  (opcode == B_TYPE) ? $signed({{20{imm_b[11]}}, imm_b}) :
                  (opcode == J_TYPE) ? $signed({{12{imm_j[19]}}, imm_j}) : 
                  {WIDTH{1'b0}};
+
+// always_comb begin
+//     $display("DECODE DEBUG: opcode = %7b | imm_ext = %0d", opcode, imm_ext);
+// end
 
 endmodule

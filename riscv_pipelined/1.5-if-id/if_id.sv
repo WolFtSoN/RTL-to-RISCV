@@ -25,16 +25,22 @@ module if_id (
 
 // TODO: Register pc and instr | (Reset to 0, Flush to 0, Hold if stalled)
 always_ff @(posedge clk or posedge rst) begin
-    if (rst || flush) begin
+    if (rst) begin
         id_pc    <= {WIDTH{1'b0}};
-        id_instr <= {WIDTH{1'b0}};  
-    end
-    else begin
-        if (!stall) begin
+        id_instr <= {WIDTH{1'b0}};
+    end else if (!stall) begin
+        if (flush) begin
+            id_pc    <= {WIDTH{1'b0}};
+            id_instr <= {WIDTH{1'b0}};
+        end else begin
             id_pc    <= if_pc;
             id_instr <= if_instr;
         end
     end
 end
-    
+
+// always_comb begin
+//     $display("IF/ID DEBUG: id_pc = %b | id_instr = %b | flush = %0b", id_pc, id_instr, flush);
+// end
+
 endmodule

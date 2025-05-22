@@ -60,4 +60,9 @@ end
 // TODO: Set zero flag if result == 0
 assign zero = (result == 0);
 
+
+// always_comb begin
+//     $display("ALU DEBUG: a = %0d | b = %0d | | alu_ctrl = %b | result = %0d", a, b, alu_ctrl, result);
+// end
+
 endmodule

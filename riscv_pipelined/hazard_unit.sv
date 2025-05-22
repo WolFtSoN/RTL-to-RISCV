@@ -12,15 +12,17 @@ module hazard_unit (
 
     output logic       stall_if,
     output logic       stall_id,
-    output logic       flush
+    output logic       flush_branch,
+    output logic       flush_jump
 );
 
-assign stall_id = ex_mem_to_reg &&
+assign stall_id = (ex_mem_to_reg &&
                  ((ex_rd != 0) &&
-                  ((ex_rd == id_rs1) || (ex_rd == id_rs2)));
+                  ((ex_rd == id_rs1) || (ex_rd == id_rs2))));
 
 assign stall_if = stall_id;
 
-assign flush = branch_taken || (id_opcode == J_TYPE) || (id_opcode == JALR_TYPE);
+
+// assign flush = branch_taken || (id_opcode == J_TYPE) || (id_opcode == JALR_TYPE);
 
 endmodule

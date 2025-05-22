@@ -35,4 +35,10 @@ always_comb begin
     endcase
 end
 
+// always_comb begin
+// //     $display("WB DEBUG: wb_sel = %2b | wb_data = %0d | pc_plus4 = %0d | reg_wr_en = %b | rd = %b", wb_sel, wb_data, pc_plus4, reg_wr_en, rd);
+//     if (reg_wr_en)
+//             $display("WB DEBUG: wb_sel = %2b | wb_data = %0d | pc_plus4 = %0d | rd = %0d", wb_sel, wb_data, pc_plus4, rd);
+// end
+
 endmodule

@@ -5,6 +5,7 @@ parameter ADDR_W = $clog2(WIDTH);
 parameter DATA_W = 32;
 parameter ALU_OP = 5;
 parameter HALT = 32'b00000000000000000000000001111111;
+parameter HALT_OP = 7'b1111111;
 
 parameter ZERO = {WIDTH{1'b0}};
 

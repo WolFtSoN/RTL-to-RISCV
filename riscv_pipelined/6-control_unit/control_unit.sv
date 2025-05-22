@@ -72,4 +72,8 @@ always_comb begin
     endcase
 end
 
+// always_comb begin
+//    $display("CU: opcode = %b | reg_wr_en = %b | wb_sel = %2b", opcode, reg_wr_en, wb_sel);
+// end
+
 endmodule
