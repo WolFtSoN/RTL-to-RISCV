@@ -32,7 +32,11 @@ assign fwd_b_sel = (mem_reg_wr_en && (mem_rd != 0) && (mem_rd == ex_rs2)) ? 2'b1
                    2'b00;
 
 // always_comb begin
-//     $display("FORWARDING DEBUG: fwd_a_sel = %b | fwd_b_sel = %b", fwd_a_sel, fwd_b_sel);
+//     $display("FORWARDING DEBUG: ex_rs1 = %0d | ex_rs2 = %0d | fwd_a_sel = %b | fwd_b_sel = %b", ex_rs1, ex_rs2 ,fwd_a_sel, fwd_b_sel);
+// end
+
+// always_comb begin
+//     $display("FORWARD WB DEBUG: wb_rd = %0d | wb_reg_wr_en = %b", wb_rd, wb_reg_wr_en);
 // end
     
 endmodule

@@ -26,6 +26,7 @@ module ex_mem (
     input logic [1:0]        wb_sel,
     input  logic [WIDTH-1:0] pc_plus4,
     input logic              mem_wr_en,
+    input  logic             mem_rd_en,  
 
     output logic [WIDTH-1:0] mem_alu_result,
     output logic [WIDTH-1:0] mem_reg_data2,
@@ -36,7 +37,8 @@ module ex_mem (
     output logic             mem_mem_to_reg,
     output logic [1:0]       mem_wb_sel,
     output logic [WIDTH-1:0] mem_pc_plus4,
-    output logic             mem_mem_wr_en
+    output logic             mem_mem_wr_en,
+    output logic             mem_mem_rd_en 
 );
 
 // TODO: Register all inputs | Reset or Flush = 0 | Stall = hold
@@ -53,6 +55,7 @@ always_ff @(posedge clk or posedge rst) begin
         mem_wb_sel      <= 0;
         mem_pc_plus4    <= 0;
         mem_mem_wr_en   <= 0;
+        mem_mem_rd_en   <= 0;
     end
     else begin
         if (!stall) begin
@@ -66,6 +69,7 @@ always_ff @(posedge clk or posedge rst) begin
             mem_wb_sel      <= wb_sel;
             mem_pc_plus4    <= pc_plus4;
             mem_mem_wr_en   <= mem_wr_en;
+            mem_mem_rd_en   <= mem_rd_en;
         end
     end
 end

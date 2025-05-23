@@ -20,7 +20,7 @@ logic [WIDTH-1:0]   reg_data1_idex, reg_data2_idex, imm_ext_idex;
 logic [4:0]         rs1_idex, rs2_idex,rd_idex;
 logic [2:0]         funct3_idex;
 logic [6:0]         funct7_idex, opcode_idex;
-logic               reg_wr_en_idex, alu_src_idex, mem_wr_en_idex, mem_to_reg_idex;
+logic               reg_wr_en_idex, alu_src_idex, mem_wr_en_idex, mem_rd_en_idex, mem_to_reg_idex;
 logic [2:0]         branch_op_idex;
 logic [1:0]         wb_sel_idex;
 logic [WIDTH-1:0]   pc_idex, instr_idex, pc_plus4_idex_out;
@@ -49,6 +49,7 @@ logic [WIDTH-1:0]   mem_data_memwb, mem_data_memwb_out, alu_result_memwb_out, pc
 logic [4:0]         rd_memwb_out;
 logic               reg_wr_en_memwb_out, mem_to_reg_memwb_out;
 logic [1:0]         wb_sel_memwb;
+logic               mem_wr_en_exmem, mem_rd_en_exmem;
 
 
 //=====================
@@ -137,6 +138,10 @@ decode_stage u_decode_stage (
     .opcode     (opcode_idex)   
 );
 
+// always_ff @(posedge clk) begin
+//     $display("DECODE DEBUG: rs1_idex = %0d | rd_idex = %0d | rs2_idex = %0d ", rs1_idex, rd_idex, rs2_idex);
+// end
+
 id_ex u_id_ex (
     .clk            (clk),
     .rst            (rst),
@@ -158,6 +163,7 @@ id_ex u_id_ex (
     .alu_src        (alu_src_cu),
     .pc_plus4       (pc_idex + 4),
     .mem_wr_en      (mem_wr_en_cu),
+    .mem_rd_en      (mem_rd_en_cu),
 
     .ex_pc          (pc_idex_out),
     .ex_reg_data1   (reg_data1_idex_out),
@@ -174,7 +180,8 @@ id_ex u_id_ex (
     .ex_wb_sel      (wb_sel_idex),
     .ex_alu_src     (alu_src_idex),
     .ex_pc_plus4    (pc_plus4_idex_out),
-    .ex_mem_wr_en   (mem_wr_en_idex)
+    .ex_mem_wr_en   (mem_wr_en_idex),
+    .ex_mem_rd_en   (mem_rd_en_idex)
 );
 
 // always_ff @(posedge clk) begin
@@ -191,7 +198,6 @@ id_ex u_id_ex (
 // end
 
 // ====== EXECUTE and EX/MEM Instantiation ======
-logic mem_wr_en_exmem;
 execute_stage u_execute_stage (
     .clk            (clk),
     .rst            (rst),
@@ -213,7 +219,8 @@ execute_stage u_execute_stage (
 
     .alu_result     (alu_result_exmem),
     .zero           (zero_flag),
-    .branch_taken   (branch_taken)
+    .branch_taken   (branch_taken),
+    .flush_pc       (flush_pc)
 );
 
 ex_mem u_ex_mem (
@@ -232,6 +239,7 @@ ex_mem u_ex_mem (
     .wb_sel         (wb_sel_idex),
     .pc_plus4       (pc_plus4_idex_out), 
     .mem_wr_en      (mem_wr_en_idex), 
+    .mem_rd_en      (mem_rd_en_idex),
 
     .mem_alu_result (alu_result_exmem_out),
     .mem_reg_data2  (reg_data2_exmem_out),
@@ -242,7 +250,8 @@ ex_mem u_ex_mem (
     .mem_mem_to_reg (mem_to_reg_exmem),
     .mem_wb_sel     (wb_sel_exmem),
     .mem_pc_plus4   (pc_plus4_exmem_out) ,
-    .mem_mem_wr_en  (mem_wr_en_exmem)
+    .mem_mem_wr_en  (mem_wr_en_exmem),
+    .mem_mem_rd_en  (mem_rd_en_exmem)
 );
 
 
@@ -252,7 +261,7 @@ memory_stage u_memory_stage (
     .clk            (clk),
     .rst            (rst),
     .mem_wr_en      (mem_wr_en_exmem),
-    .mem_rd_en      (mem_rd_en_cu),
+    .mem_rd_en      (mem_rd_en_exmem),
     .mem_addr       (alu_result_exmem_out),
     .mem_wr_data    (reg_data2_exmem_out),
     
@@ -283,6 +292,10 @@ mem_wb u_mem_wb (
     .wb_opcode      (opcode_memwb_out)
 );
 
+// always_ff @(posedge clk) begin
+//     $display("MEM_WB DEBUG: mem_to_reg = %b | mem_data = %0d", mem_to_reg, mem_data); // Should show correct 1
+// end
+
 // ====== WRITEBACK Instantiation ======
 writeback_stage wb_stage (
     .wb_data_mem    (mem_data_memwb_out),
@@ -297,6 +310,11 @@ writeback_stage wb_stage (
     .wb_wr_en       (wb_wr_en),
     .wb_rd          (wb_rd)
 );
+
+// always_comb begin
+//     $display("WB DEBUG: mem_data_memwb_out = %0d | mem_to_reg_memwb_out = %0d", 
+//                         mem_data_memwb_out, mem_to_reg_memwb_out,);
+// end
 
 // always_comb begin
 //     $display("WB DEBUG: wb_sel_memwb = %2b | wb_data = %0d | reg_wr_en = %b | rd = %b", wb_sel_memwb, wb_data, reg_wr_en_memwb_out, rd_memwb_out);
@@ -327,6 +345,7 @@ hazard_unit u_hazard (
     .ex_opcode      (opcode_idex_out),
     .ex_rd          (rd_idex_out),
     .ex_mem_to_reg  (mem_to_reg_idex),
+    .ex_reg_wr_en   (reg_wr_en_idex),
     .id_rs1         (rs1_idex),
     .id_rs2         (rs2_idex),
     .id_opcode      (opcode_idex),
@@ -355,11 +374,15 @@ forwarding_unit u_fwd (
     .fwd_b_sel     (fwd_b_sel)
 );
 
+// always_comb begin
+//     $display("WB DEBUG: rs1_idex_out = %0d | rs2_idex_out = %0d | rd_memwb_out = %0d | reg_wr_en_exmem = %0b | reg_wr_en_memwb_out = %0b | fwd_a_sel = %0d | fwd_b_sel = %0d", rs1_idex_out, rs2_idex_out, rd_memwb_out, reg_wr_en_exmem, reg_wr_en_memwb_out,fwd_a_sel,fwd_b_sel);
+// end
+
 
 // ------ Flush Logic ------
-assign flush_pc = (opcode_idex_out  == J_TYPE)    ? (pc_idex_out + imm_ext_idex_out) :
-                  (opcode_idex_out  == JALR_TYPE) ? ((reg_data1_idex_out + imm_ext_idex_out) & ~32'd1) :
-                  (branch_taken)                  ? (pc_idex_out + imm_ext_idex_out) : 32'd0;
+// assign flush_pc = (opcode_idex_out  == J_TYPE)    ? (pc_idex_out + imm_ext_idex_out) :
+//                   (opcode_idex_out  == JALR_TYPE) ? ((reg_data1_idex_out + imm_ext_idex_out) & ~32'd1) :
+//                   (branch_taken)                  ? (pc_idex_out + imm_ext_idex_out) : 32'd0;
 
 // ------ PC Logic ------
 // assign next_pc_if = (flush)     ? flush_pc  : 
@@ -375,7 +398,7 @@ assign next_pc_if = ((opcode_idex_out == J_TYPE) || (opcode_idex_out == JALR_TYP
 // end
 
 // always_ff @(posedge clk) begin
-//     $display("FLUSH DEBUG2: opcode_idex = %b | imm_ext_idex = %0d | pc_idex = %0d | flush_pc = %0d", opcode_idex, imm_ext_idex, pc_idex, flush_pc);
+//     $display("FLUSH DEBUG2: opcode_idex_out = %b | imm_ext_idex_out = %0d | reg_data1_idex_out = %0d | pc_idex_out = %0d | flush_pc = %0d", opcode_idex_out, imm_ext_idex_out, reg_data1_idex_out, pc_idex_out, flush_pc);
 // end
 
 // always_ff @(posedge clk) begin
@@ -383,6 +406,6 @@ assign next_pc_if = ((opcode_idex_out == J_TYPE) || (opcode_idex_out == JALR_TYP
 // end
 
 // To stop the tb at the right cycle                    
-assign halt = (opcode_memwb_out == HALT_OP);                    
+assign halt = (opcode_memwb_out == HALT_OP);                
 
 endmodule

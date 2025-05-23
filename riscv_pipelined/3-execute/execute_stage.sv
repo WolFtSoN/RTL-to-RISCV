@@ -31,7 +31,8 @@ module execute_stage (
 
     output logic [WIDTH-1:0] alu_result,
     output logic             zero,
-    output logic             branch_taken
+    output logic             branch_taken,
+    output logic [WIDTH-1:0] flush_pc
 );
 
 logic [ALU_OP-1:0] alu_ctrl;
@@ -47,8 +48,8 @@ logic [WIDTH-1:0] alu_operand_a, alu_operand_b_input;
     always_comb begin
         case (fwd_a_sel)
             2'b00: alu_operand_a = reg_data1;
-            2'b01: alu_operand_a = fwd_from_wb;
-            2'b10: alu_operand_a = fwd_from_mem;
+            2'b01: alu_operand_a = fwd_from_wb;     // forward from WB
+            2'b10: alu_operand_a = fwd_from_mem;    // forward from MEM
             default: alu_operand_a = reg_data1;
         endcase
     end
@@ -57,14 +58,15 @@ logic [WIDTH-1:0] alu_operand_a, alu_operand_b_input;
     always_comb begin
         case (fwd_b_sel)
             2'b00: alu_operand_b_input = reg_data2;
-            2'b01: alu_operand_b_input = fwd_from_wb;
-            2'b10: alu_operand_b_input = fwd_from_mem;
+            2'b01: alu_operand_b_input = fwd_from_wb;   // forward from WB
+            2'b10: alu_operand_b_input = fwd_from_mem;  // forward from MEM
             default: alu_operand_b_input = reg_data2;
         endcase
     end
 
     // === Final Operand B: IMM or Forwarded Reg ===
     assign alu_operand_b = (alu_src) ? imm_ext : alu_operand_b_input;
+
 
 
 // TODO: Instantiate alu_ctrl
@@ -87,18 +89,28 @@ alu u_alu (
 );
 
 // TODO: Compute branch_taken using funct3 + zero (if branch)
-assign branch_taken =   (funct3 == BR_EQ && zero)   ||
-                        (funct3 == BR_NE && !zero)  ||
-                        (funct3 == BR_GE && !(alu_operand_a < alu_operand_b));
+assign branch_taken =   (opcode == B_TYPE && (funct3 == BR_EQ && zero))   ||
+                        (opcode == B_TYPE && (funct3 == BR_NE && !zero))  ||
+                        (opcode == B_TYPE && (funct3 == BR_GE && !(alu_operand_a < alu_operand_b)));
     
 
-// always_comb begin
-//     $display("EXECUTE DEBUG: alu_operand_a = %0d | alu_operand_b = %0d | | alu_ctrl = %b | alu_result = %0d", alu_operand_a, alu_operand_b, alu_ctrl, alu_result);
+// after resolving alu_operand_a with forwarding
+assign flush_pc = (opcode == J_TYPE)     ? ex_pc + imm_ext :
+                  (opcode == JALR_TYPE)  ? (alu_operand_a + imm_ext) & ~32'd1 :
+                  (branch_taken)         ? ex_pc + imm_ext : 32'd0; 
+
+// always_ff @(posedge clk) begin
+//     $display("EXECUTE DEBUG:  fwd_a_sel = %2b | alu_operand_a = %0d | fwd_b_sel = %2b | alu_operand_b = %0d | | alu_ctrl = %b | alu_result = %0d", fwd_a_sel, alu_operand_a, fwd_b_sel, alu_operand_b, alu_ctrl, alu_result);
 // end
 
 // always_ff @(posedge clk) begin
 //     $display("ALU DEBUG: pc=%0d | a=%0d | b=%0d | imm_ext=%0d | alu_src=%b | alu_ctrl=%b | result=%0d",
 //         ex_pc, alu_operand_a, alu_operand_b, imm_ext, alu_src, alu_ctrl, alu_result);
+// end
+
+// always_ff @(posedge clk) begin
+//     $display("ALU DEBUG: branch_taken = %0b | opcode=%7b | imm_ext=%0d | flush_pc=%0d ",
+//         branch_taken, opcode, imm_ext, flush_pc);
 // end
 
 endmodule

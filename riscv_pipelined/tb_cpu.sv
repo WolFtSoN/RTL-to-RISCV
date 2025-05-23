@@ -22,6 +22,7 @@ initial begin
     // u_cpu_pipe.u_decode_stage.u_regfile.regs[1] = 10;   // x1 = 10
     // u_cpu_pipe.u_decode_stage.u_regfile.regs[2] = 20;   // x2 = 20
     // u_cpu_pipe.u_decode_stage.u_regfile.regs[3] = 7;    // x3 = 7
+    
 
     // Instruction memory initialized from hex file
     $readmemb("instructions.bit", u_cpu_pipe.u_fetch_stage.u_instr_mem.imem);
@@ -42,8 +43,6 @@ initial begin
     // add x5, x1, x2 -> x5 = x1 + x2
     // add x6, x5, x3 -> x6 = x5 + x3
 
-    // Wait some cycles to execute
-    // repeat(12) @(posedge clk);
     // wait(u_cpu_pipe.halt);
     // $display("------- add x5, x1, x2: -------");
     // $display("T = %2t | x1 = %0d" ,$time , u_cpu_pipe.u_decode_stage.u_regfile.regs[1]);
@@ -58,13 +57,14 @@ initial begin
     // ######################
 
     // $display("\nI-TYPE:\n-------");
-    // I-type: Imm(12-bits) | rs1(5-bits) | funct3(3-bits) | rd(5-bits) | opcode(7-bits) |
+    // // I-type: Imm(12-bits) | rs1(5-bits) | funct3(3-bits) | rd(5-bits) | opcode(7-bits) |
 
-    // Initialize registers manually 
+    // // Initialize registers manually 
     // u_cpu_pipe.u_decode_stage.u_regfile.regs[1] = 42;   // x1 = 42
 
-    // addi x2, x1, 5 -> x2 = x1 + 5 = 47
-    // repeat(2) @(posedge clk);
+    // // addi x2, x1, 5 -> x2 = x1 + 5 = 47
+
+    // wait(u_cpu_pipe.halt);
     // $display("------- addi x2, x1, 5: -------");
     // $display("T = %2t | x1 = %0d", $time, u_cpu_pipe.u_decode_stage.u_regfile.regs[1]);
     // $display("T = %2t | x2 = x1 + 5 = %0d", $time, u_cpu_pipe.u_decode_stage.u_regfile.regs[2]);
@@ -73,24 +73,24 @@ initial begin
     // ####### S-TYPE #######     
     // ######################
 
-    $display("\nS-TYPE:\n-------");
-    // S-type: Imm_s1(7-bits) | rs2(5-bits) | rs1(5-bits) | funct3(3-bits) | Imm_s2(5-bits) | opcode(7-bits) |
+    // $display("\nS-TYPE:\n-------");
+    // // S-type: Imm_s1(7-bits) | rs2(5-bits) | rs1(5-bits) | funct3(3-bits) | Imm_s2(5-bits) | opcode(7-bits) |
 
-    u_cpu_pipe.u_decode_stage.u_regfile.regs[1] = 10;   // x1 = 10
-    u_cpu_pipe.u_decode_stage.u_regfile.regs[3] = 99;   // x3 = 99
+    // u_cpu_pipe.u_decode_stage.u_regfile.regs[1] = 10;   // x1 = 10
+    // u_cpu_pipe.u_decode_stage.u_regfile.regs[3] = 99;   // x3 = 99
 
-    // sw x3, 8(x1) -> MEM[x1 + 8] = x3
-    offset = 8;
-    mem_addr = (u_cpu_pipe.u_decode_stage.u_regfile.regs[1] + offset) >> 2;
+    // // sw x3, 8(x1) -> MEM[x1 + 8] = x3
+    // offset = 8;
+    // mem_addr = (u_cpu_pipe.u_decode_stage.u_regfile.regs[1] + offset) >> 2;
 
-    wait(u_cpu_pipe.halt);
-    $display("------- sw x3, 8(x1): -------");
-    $display("T = %2t | x3 = %0d | x1 = %0d | offset = %0d", $time, u_cpu_pipe.u_decode_stage.u_regfile.regs[3], u_cpu_pipe.u_decode_stage.u_regfile.regs[1], 8);
-    $display("MEM[x1+8] = %0d",  u_cpu_pipe.u_memory_stage.mem[mem_addr]);
+    // wait(u_cpu_pipe.halt);
+    // $display("------- sw x3, 8(x1): -------");
+    // $display("T = %2t | x3 = %0d | x1 = %0d | offset = %0d", $time, u_cpu_pipe.u_decode_stage.u_regfile.regs[3], u_cpu_pipe.u_decode_stage.u_regfile.regs[1], 8);
+    // $display("MEM[x1+8] = %0d",  u_cpu_pipe.u_memory_stage.mem[mem_addr]);
 
-    $display("------- sw x0, 0(x0): -------");
-    $display("T = %2t | x0 = %0d | offset = %0d ", $time, u_cpu_pipe.u_decode_stage.u_regfile.regs[0], 0);
-    $display("MEM[x0+0] = %0d",  u_cpu_pipe.u_memory_stage.mem[0]);
+    // $display("------- sw x0, 0(x0): -------");
+    // $display("T = %2t | x0 = %0d | offset = %0d ", $time, u_cpu_pipe.u_decode_stage.u_regfile.regs[0], 0);
+    // $display("MEM[x0+0] = %0d",  u_cpu_pipe.u_memory_stage.mem[0]);
 
     // ######################
     // ####### I-LOAD #######     
@@ -98,11 +98,12 @@ initial begin
 
     // $display("\nI-LOAD:\n-------");
 
-    // lw x5, 0(x0) -> x5 = MEM[x0 + 0]
+    // // lw x5, 12(x0) -> x5 = MEM[x0 + 12]
 
-    // repeat(1) @(posedge clk);
-    // $display("------- lw x5, 0(x0): -------");
-    // $display("T = %3t | x5 = %0d", $time, u_cpu_pipe.u_decode_stage.u_regfile.regs[5]);
+    // u_cpu_pipe.u_memory_stage.mem[3] = 99;
+    // wait(u_cpu_pipe.halt);
+    // $display("------- lw x5, 12(x0): -------");
+    // $display("x5 = %0d\n", u_cpu_pipe.u_decode_stage.u_regfile.regs[5]);
 
     // ######################
     // ####### B-TYPE #######     
@@ -144,7 +145,7 @@ initial begin
 
     // $display("\nJALR-TYPE:\n-------");
 
-    // repeat(6) @(posedge clk); 
+    // wait(u_cpu_pipe.halt);
 
     // $display("\nT = %2t | x1 = x0 + 4 = %0d\n" ,$time , u_cpu_pipe.u_decode_stage.u_regfile.regs[1]);
 
@@ -161,6 +162,7 @@ initial begin
     // $display("\nM-EXTENSION:\n-------");
 
     // wait(u_cpu_pipe.halt);
+    // // repeat(20) @(posedge clk);
 
     // $display("\nT = %2t | x1 = x0 + 10 = %0d\n" ,$time , u_cpu_pipe.u_decode_stage.u_regfile.regs[1]);
 
@@ -189,19 +191,16 @@ initial begin
     // ####### Prime Checker #######     
     // ############################# 
 
-    // $display("\nPrime Checker:\n-------");
+    $display("\nPrime Checker:\n-------");
 
-    // wait(cpu_pipelined.halt);
+    wait(u_cpu_pipe.halt);
 
-    // $display("x0 = %0d", u_cpu_pipe.u_decode_stage.u_regfile.regs[0]);
-    // $display("x10 = %0d", u_cpu_pipe.u_decode_stage.u_regfile.regs[10]);
-    // $display("x1 = %0d", u_cpu_pipe.u_decode_stage.u_regfile.regs[1]);
-    // $display("x2 = %0d <-- isPrime", u_cpu_pipe.u_decode_stage.u_regfile.regs[2]);
-    // $display("x3 = %0d <-- remainder", u_cpu_pipe.u_decode_stage.u_regfile.regs[3]);
+    $display("\nN = %0d", u_cpu_pipe.u_decode_stage.u_regfile.regs[10]);
+    $display("x3 = %0d <-- remainder", u_cpu_pipe.u_decode_stage.u_regfile.regs[3]);
     
-    // $display("x2 = %0d => %s", u_cpu_pipe.u_decode_stage.u_regfile.regs[2], (u_cpu_pipe.u_decode_stage.u_regfile.regs[2] == 1) ? "prime" : "not prime");
+    $display("x2 = %0d => N is: %0s", u_cpu_pipe.u_decode_stage.u_regfile.regs[2], (u_cpu_pipe.u_decode_stage.u_regfile.regs[2] == 1) ? "Prime" : "Not Prime");
 
-    // $display("\n---------------------------------------------");
+    $display("\n---------------------------------------------");
     $finish;
 end
 

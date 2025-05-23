@@ -203,17 +203,17 @@ def assemble(instr):
 
 # Sample instructions
 ## Test for R-type | I-type | S-type
-instructions = [
-    "add x5, x1, x2",   # x5 = x1 + x2
-    "add x6, x5, x3",   # x6 = x5 + x3
-    "nop"           ,
-    "addi x2, x1, 5",   # x2 = x1 + 5
-    "sw x3, 8(x1)"  ,   # MEM[x1 + 8] = x3
-    "sw x0, 0(x0)"  ,
-    # "nop"           ,
-    "lw x5, 0(x0)"  ,   # load from memory[0] into x5
-    "halt",
-]
+# instructions = [
+#     "add x5, x1, x2",   # x5 = x1 + x2
+#     "add x6, x5, x3",   # x6 = x5 + x3
+#     # "nop"           ,
+#     "addi x2, x1, 5",   # x2 = x1 + 5
+#     "sw x3, 8(x1)"  ,   # MEM[x1 + 8] = x3
+#     # "sw x0, 0(x0)"  ,
+#     # "nop"           ,
+#     "lw x5, 12(x0)"  ,   # load from memory[0] into x5
+#     "halt",
+# ]
 
 ## Test for B-type
 # instructions = [
@@ -240,6 +240,7 @@ instructions = [
 #     "jalr x2, 8(x1)"    ,   # pc = 4  | x2 = pc + 4 , pc = x1 + 8
 #     "addi x3, x0, 99"   ,   # pc = 8  | should be skipped
 #     "addi x4, x0, 7"    ,   # pc = 12 | should execute
+#     "halt"              ,
 # ]
 
 ## Test for label
@@ -270,30 +271,30 @@ instructions = [
 # ]
 
 ## Test Prime Checker
-# instructions = [
-#     ".text"
+instructions = [
+    ".text"
 
-#     "main:"          ,               
-#         "li x10, 11" ,               # pc = 0    | n = 10
-#         "li x1, 2"   ,               # pc = 4    | i = 2
-#         "li x2, 1"   ,               # pc = 8    | isPrime = 1 (assume prime)
+    "main:"          ,               
+        "li x10, 11" ,               # pc = 0    | n = 11
+        "li x1, 2"   ,               # pc = 4    | i = 2
+        "li x2, 1"   ,               # pc = 8    | isPrime = 1 (assume prime)
 
-#     "loop:"                      ,   
-#         "bge x1, x10, done"      ,   # pc = 12   | if i >= n → done
-#         "rem x3, x10, x1"        ,   # pc = 16   | x3 = x10 % x1
-#         "beq x3, x0, not_prime"  ,   # pc = 20   | if rem == 0 → not_prime
-#         "addi x1, x1, 1"         ,   # pc = 24   | i++
-#         "j loop"                 ,   # pc = 28
+    "loop:"                      ,   
+        "bge x1, x10, done"      ,   # pc = 12   | if i >= n → done
+        "rem x3, x10, x1"        ,   # pc = 16   | x3 = x10 % x1
+        "beq x3, x0, not_prime"  ,   # pc = 20   | if rem == 0 → not_prime
+        "addi x1, x1, 1"         ,   # pc = 24   | i++
+        "j loop"                 ,   # pc = 28
     
-#     "not_prime:"   ,                
-#         "li x2, 0" ,                # pc = 32
+    "not_prime:"   ,                
+        "li x2, 0" ,                # pc = 32
 
-#     "done:"        ,                  
-#         "nop"      ,                # pc = 36      
-#         # if x10 == 1 -> n is prime
-#         # if x10 == 0 -> n is not prime
-#     "halt",
-# ]
+    "done:"        ,                  
+        "nop"      ,                # pc = 36      
+        # if x10 == 1 -> n is prime
+        # if x10 == 0 -> n is not prime
+    "halt",
+]
 
 # Generate binary output
 # def write_to_file(filename, instructions):

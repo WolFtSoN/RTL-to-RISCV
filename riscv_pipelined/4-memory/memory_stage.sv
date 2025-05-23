@@ -36,4 +36,8 @@ assign mem_data_out = (mem_rd_en) ? mem[mem_addr[9:2]] : {WIDTH{1'b0}};
 //     $display("MEM DEBUG: mem_wr_en = %0b | mem_addr = %0d | mem_wr_data = %0d", mem_wr_en, mem_addr[9:2], mem_wr_data);
 // end
 
+// always_ff @(posedge clk) begin
+//      $display("MEM DEBUG: mem_rd_en = %0b | mem_addr = %0d |  mem[mem_addr[9:2]] = %0d | mem_data_out = %0d", mem_rd_en, mem_addr[9:2],  mem[mem_addr[9:2]], mem_data_out);
+// end
+
 endmodule

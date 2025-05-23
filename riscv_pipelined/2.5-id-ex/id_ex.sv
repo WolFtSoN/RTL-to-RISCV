@@ -32,6 +32,7 @@ module id_ex (
     input logic                 alu_src,
     input logic [WIDTH-1:0]     pc_plus4,
     input logic                 mem_wr_en,
+    input  logic                mem_rd_en, 
 
     output logic [WIDTH-1:0]    ex_pc,
     output logic [WIDTH-1:0]    ex_reg_data1,
@@ -48,7 +49,9 @@ module id_ex (
     output logic [1:0]          ex_wb_sel,
     output logic                ex_alu_src,
     output logic [WIDTH-1:0]    ex_pc_plus4,
-    output logic                ex_mem_wr_en
+    output logic                ex_mem_wr_en,
+    output logic                ex_mem_rd_en 
+
 );
 
 // TODO: Register all inputs (Reset or Flush = 0 | Stall = hold)
@@ -70,6 +73,7 @@ always_ff @(posedge clk or posedge rst) begin
         ex_alu_src      <= 0;
         ex_pc_plus4     <= 0;
         ex_mem_wr_en    <= 0;
+        ex_mem_rd_en    <= 0;
     end else if (!stall) begin
         if (flush) begin
             ex_pc           <= {WIDTH{1'b0}};
@@ -88,6 +92,7 @@ always_ff @(posedge clk or posedge rst) begin
             ex_alu_src      <= 0;
             ex_pc_plus4     <= 0;
             ex_mem_wr_en    <= 0;
+            ex_mem_rd_en    <= 0;
         end else begin
             ex_pc           <= id_pc;
             ex_reg_data1    <= reg_data1;
@@ -105,6 +110,7 @@ always_ff @(posedge clk or posedge rst) begin
             ex_alu_src      <= alu_src;
             ex_pc_plus4     <= pc_plus4;
             ex_mem_wr_en    <= mem_wr_en;
+            ex_mem_rd_en    <= mem_rd_en;
         end
     end
 end
