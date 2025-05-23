@@ -46,12 +46,6 @@ always_comb begin
             mem_wr_en   = 1;
             alu_src     = 1;  
         end
-        I_LOAD: begin
-            alu_src     = 1;
-            reg_wr_en   = 1;
-            mem_rd_en   = 1;
-            mem_to_reg  = 1;
-        end
         B_TYPE: begin
             branch = 1;
             case (funct3)

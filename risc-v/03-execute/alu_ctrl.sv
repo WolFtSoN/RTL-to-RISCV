@@ -17,7 +17,7 @@ module alu_ctrl (
 // TODO: Implement logic that maps funct3, funct7, and opcode to alu_ctrl
 
 always_comb begin
-    alu_ctrl = 4'b0000; // default (AND)
+    alu_ctrl = {ALU_OP{1'b0}}; // default (AND)
     
     case (opcode)
         R_TYPE : begin
