@@ -96,17 +96,31 @@ echo Top-level testbench detected: %top_module%
 :: -----------------------------
 set "do_file=sim.do"
 (
+    @REM echo vsim -c work.%top_module%
+    @REM if "%wave_option%"=="-wave" (
+    @REM     @REM echo add wave *
+    @REM     @REM echo log -r /*
+    @REM     echo vcd file waveform.vcd
+    @REM     echo vcd add -r /*
+    @REM     echo vcd flush
+    @REM     echo vcd off
+    @REM )
+    @REM echo run -all
+    
     echo vsim -c work.%top_module%
     if "%wave_option%"=="-wave" (
-        @REM echo add wave *
-        @REM echo log -r /*
         echo vcd file waveform.vcd
         echo vcd add -r /*
+        echo vcd on
+    )
+    echo run -all
+    if "%wave_option%"=="-wave" (
         echo vcd flush
         echo vcd off
     )
-    echo run -all
+    echo quit
 ) > %do_file%
+
 
 :: -----------------------------
 :: Run simulation
