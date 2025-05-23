@@ -140,33 +140,38 @@ The `risc-v/` directory holds a complete 32-bit RISC-V CPU implemented in System
 │   │        │── a06_top_system.sv
 │   │        └── tb_top_system.sv
 │   │     
-│   └── risc-v
-│       │── 01-fetch
-│       │    │── instr_mem.sv
-│       │    └── pc_register.sv
-|       |
-│       │── 02-decode
-│       │    │── decoder.sv
-│       │    └── regfile.sv
-|       |
-│       │── 03-execute
-│       │    │── alu_ctrl.sv
-│       │    └── alu.sv
-|       |
-│       │── 04-memory
-│       │    └── data_mem.sv
-|       |
-│       │── 05-writeback
-│       │    └── writeback_mux.sv
-|       |
-│       │── 06-control_unit
-|       |    └── control_unit.sv
-|       |
-|       ├── all_pkgs.sv
-|       ├── cpu_single_cycle.sv
-|       ├── tb_cpu.sv
-|       ├── riscv_assembler.py
-|       └── instructions.bit
+│   │── risc-v
+│   |    │── 01-fetch
+│   |    │    │── instr_mem.sv
+│   |    │    └── pc_register.sv
+|   |    |
+│   |    │── 02-decode
+│   |    │    │── decoder.sv
+│   |    │    └── regfile.sv
+|   |    |
+│   |    │── 03-execute
+│   │    │    │── alu_ctrl.sv
+│   │    │    └── alu.sv
+|   │    |
+│   │    │── 04-memory
+│   │    │    └── data_mem.sv
+|   │    |
+│   │    │── 05-writeback
+│   │    │    └── writeback_mux.sv
+|   │    |
+│   │    │── 06-control_unit
+|   │    |    └── control_unit.sv
+|   │    |
+|   │    ├── all_pkgs.sv
+|   │    ├── cpu_single_cycle.sv`
+|   │    ├── tb_cpu.sv
+|   │    ├── riscv_assembler.py
+|   │    └── instructions.bit
+│   │     
+│   └── riscv_pipelined
+│        ├── if_stage.sv 
+|        ├── prefetch_buffer.sv 
+|        └── instr_mem.sv
 ├── run.bat
 └── README.md
 ```
